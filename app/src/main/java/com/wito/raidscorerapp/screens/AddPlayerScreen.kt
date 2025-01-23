@@ -56,7 +56,7 @@ fun  AddPlayerScreen(onAddPlayer: (Player) -> Unit)  {
                 if (nombre.isNotBlank() && clase.isNotBlank() && especializacion.isNotBlank()){
                     onAddPlayer (Player(nombre, clase, especializacion))
                 } else {
-                    Toast.makeText(LocalContext.current,"Faltan campos por completar", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(LocalContext.current,"Faltan campos por completar", Toast.LENGTH_SHORT).show()
                 }
             },
             modifier = Modifier.fillMaxWidth()

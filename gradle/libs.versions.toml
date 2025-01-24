@@ -11,6 +11,7 @@ composeBom = "2024.04.01"
 navigationCompose = "2.8.5"
 
 [libraries]
+gson = "com.google.code.gson:gson:2.10.1"
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

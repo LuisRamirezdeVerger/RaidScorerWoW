@@ -38,28 +38,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-//@Composable
-//fun MainMenu(){
-//    Surface(
-//        modifier = Modifier.fillMaxSize(),
-//        color = MaterialTheme.colorScheme.background
-//    ) {
-//        Column (
-//            modifier = Modifier.fillMaxSize(),
-//            verticalArrangement = Arrangement.Center,
-//            horizontalAlignment = Alignment.CenterHorizontally
-//        ) {
-//            Button(onClick = { /* Navegar a Agregar Jugador */ }) {
-//                Text (text = "Agregar Jugador")
-//            }
-//            Spacer(modifier = Modifier.height(16.dp))
-//            Button(onClick = { /* Navegar a Ver Puntuaciones */ }) {
-//                Text (text = "Ver puntuaciones")
-//            }
-//        }
-//    }
-//}
-
 @Composable
 fun MainNavGraph(){
     val navController = rememberNavController()

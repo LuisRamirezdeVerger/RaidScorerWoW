@@ -41,6 +41,16 @@ fun  AddPlayerScreen(onAddPlayer: (Player) -> Unit)  {
 
         Spacer (modifier = Modifier.height(8.dp))
 
+            //Class field
+        TextField(
+            value = clase,
+            onValueChange = {clase = it},
+            label = { Text("Clase") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer (modifier = Modifier.height(8.dp))
+
             //Spec field
         TextField(
             value = especializacion,
@@ -56,6 +66,8 @@ fun  AddPlayerScreen(onAddPlayer: (Player) -> Unit)  {
             onClick = {
                 if (nombre.isNotBlank() && clase.isNotBlank() && especializacion.isNotBlank()){
                     onAddPlayer (Player(nombre, clase, especializacion))
+                    Toast.makeText(context,"Jugador $nombre agregado correctamente", Toast.LENGTH_SHORT).show()
+
                 } else {
                     Toast.makeText(context,"Faltan campos por completar", Toast.LENGTH_SHORT).show()
                 }

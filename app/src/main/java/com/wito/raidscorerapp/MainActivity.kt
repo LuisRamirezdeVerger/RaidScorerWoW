@@ -20,6 +20,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.wito.raidscorerapp.screens.AddPlayerScreen
 import com.wito.raidscorerapp.ui.theme.RaidScorerAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -27,7 +32,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             RaidScorerAppTheme {
-                MainMenu()
+                MainNavGraph()
             }
         }
     }
@@ -52,5 +57,38 @@ fun MainMenu(){
                 Text (text = "Ver puntuaciones")
             }
         }
+    }
+}
+
+@Composable
+fun MainNavGraph(){
+    val navController = rememberNavController()
+
+    NavHost(navController = navController, startDestination = "home"){
+        composable("home") {
+            //Main Screen
+            HomeScreen (navController = navController)
+        }
+        composable("add player") {
+            AddPlayerScreen(onAddPlayer = {player ->
+            })
+        }
+    }
+}
+
+@Composable
+fun HomeScreen(navController : NavController){
+    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+        Button(onClick = { navController.navigate("add player")}) {
+            Text ("Agregar jugador")
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview(){
+    RaidScorerAppTheme {
+        HomeScreen(navController = rememberNavController())
     }
 }

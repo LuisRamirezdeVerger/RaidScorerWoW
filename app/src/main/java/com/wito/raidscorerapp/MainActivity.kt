@@ -32,6 +32,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.wito.raidscorerapp.model.Player
 import com.wito.raidscorerapp.screens.AddPlayerScreen
+import com.wito.raidscorerapp.screens.PlayerListScreen
 import com.wito.raidscorerapp.ui.theme.RaidScorerAppTheme
 import com.wito.raidscorerapp.utils.JsonUtils
 
@@ -62,7 +63,7 @@ fun MainNavGraph(){
             //Main Screen
             HomeScreen(
                 navController = navController,
-                players = TODO()
+                players = players
             )
         }
         composable("add player") {
@@ -73,6 +74,9 @@ fun MainNavGraph(){
                     JsonUtils.savePlayersToFile(context, players)
                     println("Player agregado: ${player.nombre}, ${player.clase}, ${player.especializacion}")
             })
+        }
+        composable("list players") {
+            PlayerListScreen(players = players, navController = navController)
         }
     }
 }

@@ -33,6 +33,8 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
+
+
 @Composable
 fun RaidScorerAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),

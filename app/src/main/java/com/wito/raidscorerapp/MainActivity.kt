@@ -4,12 +4,15 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -57,7 +60,10 @@ fun MainNavGraph(){
     NavHost(navController = navController, startDestination = "home"){
         composable("home") {
             //Main Screen
-            HomeScreen (navController = navController)
+            HomeScreen(
+                navController = navController,
+                players = TODO()
+            )
         }
         composable("add player") {
             AddPlayerScreen(
@@ -72,7 +78,7 @@ fun MainNavGraph(){
 }
 
 @Composable
-fun HomeScreen(navController : NavController){
+fun HomeScreen(navController : NavController, players: List<Player>){
         //Main Screen Design
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -83,19 +89,63 @@ fun HomeScreen(navController : NavController){
             verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier.fillMaxSize().padding(16.dp)
         ) {
-            Text(text = "Raid Scorer App", modifier = Modifier.padding(bottom = 16.dp))
+            Text(text = "Raid Scorer App",
+                modifier = Modifier.padding(bottom = 16.dp),
+                style = MaterialTheme.typography.headlineMedium
+            )
+
+            //Lazycolumn to list players
+            if (players.isEmpty()){
+                Text("No hay jugadores registrados aún")
+            } else {
+                LazyColumn(
+                    modifier = Modifier.fillMaxWidth().weight(1f)
+                ) {
+                    items(players){ player ->
+                        PlayerItem(player)
+                    }
+                }
+            }
+
             Button(onClick = { navController.navigate("add player")}) {
                 Text ("Agregar jugador")
+            }
+
+            Button(
+                onClick = { navController.navigate("list players") },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Listar jugadores")
             }
         }
     }
 
 }
 
+@Composable
+fun PlayerItem(player : Player){
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+            .background(MaterialTheme.colorScheme.surface)
+            .padding(16.dp)
+    ) {
+        Text("Nombre: ${player.nombre}", style = MaterialTheme.typography.bodyLarge)
+        Text("Clase: ${player.clase}", style = MaterialTheme.typography.bodyMedium)
+        Text("Especialización: ${player.especializacion}", style = MaterialTheme.typography.bodySmall)
+
+
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview(){
     RaidScorerAppTheme {
-        HomeScreen(navController = rememberNavController())
+        HomeScreen(
+            navController = rememberNavController(),
+            players = TODO()
+        )
     }
 }

@@ -11,11 +11,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
 import com.wito.raidscorerapp.model.Player
+import com.wito.raidscorerapp.screens.AddPlayerScreen
 
 @Composable
-fun  AddPlayerScreen(onAddPlayer: (Player) -> Unit)  {
+fun  AddPlayerScreen(
+    navController: NavController,
+    onAddPlayer: (Player) -> Unit)  {
     var nombre by remember { mutableStateOf("") }
     var clase by remember { mutableStateOf("") }
     var especializacion by remember { mutableStateOf("") }
@@ -67,7 +72,8 @@ fun  AddPlayerScreen(onAddPlayer: (Player) -> Unit)  {
                 if (nombre.isNotBlank() && clase.isNotBlank() && especializacion.isNotBlank()){
                     onAddPlayer (Player(nombre, clase, especializacion))
                     Toast.makeText(context,"Jugador $nombre agregado correctamente", Toast.LENGTH_SHORT).show()
-
+                    // Navegamos de regreso a la pantalla principal
+                    navController.popBackStack()
                 } else {
                     Toast.makeText(context,"Faltan campos por completar", Toast.LENGTH_SHORT).show()
                 }
@@ -82,5 +88,8 @@ fun  AddPlayerScreen(onAddPlayer: (Player) -> Unit)  {
 @Preview(showBackground = true)
 @Composable
 fun PreviewAddPlayerScreen() {
-    AddPlayerScreen(onAddPlayer = {})
+    AddPlayerScreen(
+        onAddPlayer = {},
+        navController = rememberNavController()
+    )
 }

@@ -38,27 +38,27 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun MainMenu(){
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Column (
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Button(onClick = { /* Navegar a Agregar Jugador */ }) {
-                Text (text = "Agregar Jugador")
-            }
-            Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = { /* Navegar a Ver Puntuaciones */ }) {
-                Text (text = "Ver puntuaciones")
-            }
-        }
-    }
-}
+//@Composable
+//fun MainMenu(){
+//    Surface(
+//        modifier = Modifier.fillMaxSize(),
+//        color = MaterialTheme.colorScheme.background
+//    ) {
+//        Column (
+//            modifier = Modifier.fillMaxSize(),
+//            verticalArrangement = Arrangement.Center,
+//            horizontalAlignment = Alignment.CenterHorizontally
+//        ) {
+//            Button(onClick = { /* Navegar a Agregar Jugador */ }) {
+//                Text (text = "Agregar Jugador")
+//            }
+//            Spacer(modifier = Modifier.height(16.dp))
+//            Button(onClick = { /* Navegar a Ver Puntuaciones */ }) {
+//                Text (text = "Ver puntuaciones")
+//            }
+//        }
+//    }
+//}
 
 @Composable
 fun MainNavGraph(){
@@ -70,7 +70,10 @@ fun MainNavGraph(){
             HomeScreen (navController = navController)
         }
         composable("add player") {
-            AddPlayerScreen(onAddPlayer = {player ->
+            AddPlayerScreen(
+                navController = navController,
+                onAddPlayer = {player ->
+                    println("Player agregado: ${player.nombre}, ${player.clase}, ${player.especializacion}")
             })
         }
     }
@@ -78,11 +81,23 @@ fun MainNavGraph(){
 
 @Composable
 fun HomeScreen(navController : NavController){
-    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-        Button(onClick = { navController.navigate("add player")}) {
-            Text ("Agregar jugador")
+        //Main Screen Design
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    )  {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            modifier = Modifier.fillMaxSize().padding(16.dp)
+        ) {
+            Text(text = "Raid Scorer App", modifier = Modifier.padding(bottom = 16.dp))
+            Button(onClick = { navController.navigate("add player")}) {
+                Text ("Agregar jugador")
+            }
         }
     }
+
 }
 
 @Preview(showBackground = true)

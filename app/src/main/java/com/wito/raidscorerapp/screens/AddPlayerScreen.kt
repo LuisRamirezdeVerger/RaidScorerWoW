@@ -19,6 +19,7 @@ fun  AddPlayerScreen(onAddPlayer: (Player) -> Unit)  {
     var nombre by remember { mutableStateOf("") }
     var clase by remember { mutableStateOf("") }
     var especializacion by remember { mutableStateOf("") }
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -44,7 +45,7 @@ fun  AddPlayerScreen(onAddPlayer: (Player) -> Unit)  {
         TextField(
             value = especializacion,
             onValueChange = {especializacion = it},
-            label = { Text("Especializaci'on") },
+            label = { Text("Especialización") },
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -56,7 +57,7 @@ fun  AddPlayerScreen(onAddPlayer: (Player) -> Unit)  {
                 if (nombre.isNotBlank() && clase.isNotBlank() && especializacion.isNotBlank()){
                     onAddPlayer (Player(nombre, clase, especializacion))
                 } else {
-                    //Toast.makeText(LocalContext.current,"Faltan campos por completar", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context,"Faltan campos por completar", Toast.LENGTH_SHORT).show()
                 }
             },
             modifier = Modifier.fillMaxWidth()

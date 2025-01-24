@@ -16,16 +16,21 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.wito.raidscorerapp.model.Player
 import com.wito.raidscorerapp.screens.AddPlayerScreen
 import com.wito.raidscorerapp.ui.theme.RaidScorerAppTheme
+import com.wito.raidscorerapp.utils.JsonUtils
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +46,13 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainNavGraph(){
     val navController = rememberNavController()
+    val context = LocalContext.current
+    val players = remember { mutableListOf<Player>() }
+
+    //Load players from JSON
+    LaunchedEffect(Unit) {
+        players.addAll(JsonUtils.loadPlayersFromFile(context))
+    }
 
     NavHost(navController = navController, startDestination = "home"){
         composable("home") {
@@ -51,6 +63,8 @@ fun MainNavGraph(){
             AddPlayerScreen(
                 navController = navController,
                 onAddPlayer = {player ->
+                    players.add(player)
+                    JsonUtils.savePlayersToFile(context, players)
                     println("Player agregado: ${player.nombre}, ${player.clase}, ${player.especializacion}")
             })
         }

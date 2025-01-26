@@ -56,6 +56,9 @@ fun PlayerListScreen (players: List<Player>, navController: NavController){
                         )
                 }
             }
+            if (players.isEmpty()){
+                Text("No hay jugadores registrados aún")
+            }
 
             Button(
                 onClick = {navController.popBackStack()},
@@ -73,9 +76,15 @@ fun PlayerListScreen (players: List<Player>, navController: NavController){
 
 @Composable
 fun PlayerItem(player: Player, modifier: Modifier = Modifier) {
-    Text(
-        text = player.nombre,
-        modifier = modifier,
-        color = Color.Black
-    )
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+            .background(MaterialTheme.colorScheme.surface)
+            .padding(16.dp)
+    ) {
+        Text("Nombre: ${player.nombre}", style = MaterialTheme.typography.bodyLarge, color = Color.White)
+        Text("Clase: ${player.clase}", style = MaterialTheme.typography.bodyMedium, color = Color.White)
+        Text("Especialización: ${player.especializacion}", style = MaterialTheme.typography.bodySmall, color = Color.White)
+    }
 }

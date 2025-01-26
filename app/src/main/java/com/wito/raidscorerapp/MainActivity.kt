@@ -104,20 +104,10 @@ fun HomeScreen(navController : NavController, players: List<Player>){
                 style = MaterialTheme.typography.headlineMedium
             )
 
-            //Lazycolumn to list players
-            if (players.isEmpty()){
-                Text("No hay jugadores registrados aún")
-            } else {
-                LazyColumn(
-                    modifier = Modifier.fillMaxWidth().weight(1f)
-                ) {
-                    items(players){ player ->
-                        PlayerItem(player)
-                    }
-                }
-            }
-
-            Button(onClick = { navController.navigate("add player")}) {
+            Button(
+                onClick = { navController.navigate("add player")},
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 Text ("Agregar jugador")
             }
 
@@ -130,23 +120,6 @@ fun HomeScreen(navController : NavController, players: List<Player>){
         }
     }
 
-}
-
-@Composable
-fun PlayerItem(player : Player){
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp)
-            .background(MaterialTheme.colorScheme.surface)
-            .padding(16.dp)
-    ) {
-        Text("Nombre: ${player.nombre}", style = MaterialTheme.typography.bodyLarge, color = Color.White)
-        Text("Clase: ${player.clase}", style = MaterialTheme.typography.bodyMedium, color = Color.White)
-        Text("Especialización: ${player.especializacion}", style = MaterialTheme.typography.bodySmall, color = Color.White)
-
-
-    }
 }
 
 @Preview(showBackground = true)

@@ -84,10 +84,20 @@ fun  AddPlayerScreen(
             Text("Agregar Jugador")
         }
     }
+    Button(
+        onClick = {navController.popBackStack()},
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 16.dp)
+    ) {
+        Text("Volver")
+    }
+
 }
 
+
 @Composable
-fun PlayerItem(player : Player){
+fun PlayerItem(player : Player, navController: NavController){
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -98,9 +108,16 @@ fun PlayerItem(player : Player){
         Text("Nombre: ${player.nombre}", style = MaterialTheme.typography.bodyLarge, color = Color.White)
         Text("Clase: ${player.clase}", style = MaterialTheme.typography.bodyMedium, color = Color.White)
         Text("Especialización: ${player.especializacion}", style = MaterialTheme.typography.bodySmall, color = Color.White)
-
-
+        Button(
+            onClick = {navController.popBackStack()},
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp)
+        ) {
+            Text("Volver")
+        }
     }
+
 }
 
 @Preview(showBackground = true)

@@ -1,29 +1,23 @@
 package com.wito.raidscorerapp
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -34,8 +28,10 @@ import androidx.navigation.compose.rememberNavController
 import com.wito.raidscorerapp.model.Player
 import com.wito.raidscorerapp.screens.AddPlayerScreen
 import com.wito.raidscorerapp.screens.PlayerListScreen
+import com.wito.raidscorerapp.screens.RemovePlayerScreen
 import com.wito.raidscorerapp.ui.theme.RaidScorerAppTheme
 import com.wito.raidscorerapp.utils.JsonUtils
+//import kotlin.coroutines.jvm.internal.CompletedContinuation.context
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +48,7 @@ class MainActivity : ComponentActivity() {
 fun MainNavGraph(){
     val navController = rememberNavController()
     val context = LocalContext.current
-    val players = remember { mutableListOf<Player>() }
+    val players = rememberSaveable{ mutableListOf<Player>() }
 
     //Load players from JSON
     LaunchedEffect(Unit) {
@@ -78,17 +74,27 @@ fun MainNavGraph(){
                 onAddPlayer = {player ->
                     players.add(player)
                     JsonUtils.savePlayersToFile(context, players)
-                    println("Player agregado: ${player.nombre}, ${player.clase}, ${player.especializacion}")
+                    println("Jugador agregado: ${player.nombre}, ${player.clase}, ${player.especializacion}")
             })
         }
         composable("list players") {
             PlayerListScreen(players = players, navController = navController)
         }
+
+        composable("remove players") {
+            RemovePlayerScreen(
+                players = players,
+                navController = navController,
+                onRemovePlayer = { player ->
+                    JsonUtils.removePlayersAndSave(context, player, players)
+                }
+            )
+        }
     }
 }
 
 @Composable
-fun HomeScreen(navController : NavController, players: List<Player>){
+fun HomeScreen(navController: NavController, players: MutableList<Player>){
         //Main Screen Design
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -117,18 +123,28 @@ fun HomeScreen(navController : NavController, players: List<Player>){
             ) {
                 Text("Listar jugadores")
             }
+
+            Button(onClick = { navController.navigate("remove players") }) {
+                Text("Eliminar jugador")
+            }
         }
     }
 
 }
 
+
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview(){
+fun DefaultPreview() {
+    @SuppressLint("UnrememberedMutableState")
+    val examplePlayers = mutableStateListOf(
+        Player("Ejemplo1", "Clase1", "Especialización1"),
+        Player("Ejemplo2", "Clase2", "Especialización2")
+    )
     RaidScorerAppTheme {
         HomeScreen(
             navController = rememberNavController(),
-            players = TODO()
+            players = examplePlayers
         )
     }
 }

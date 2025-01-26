@@ -24,7 +24,7 @@ import androidx.navigation.NavController
 import com.wito.raidscorerapp.model.Player
 
 @Composable
-fun PlayerListScreen (players: List<Player>, navController: NavController){
+fun PlayerListScreen (players: MutableList<Player>, navController: NavController){
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.TopCenter

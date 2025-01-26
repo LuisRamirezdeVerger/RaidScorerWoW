@@ -5,13 +5,16 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
@@ -19,9 +22,10 @@ import com.wito.raidscorerapp.model.Player
 import com.wito.raidscorerapp.screens.AddPlayerScreen
 
 @Composable
-fun  AddPlayerScreen(
+fun AddPlayerScreen(
     navController: NavController,
-    onAddPlayer: (Player) -> Unit)  {
+    onAddPlayer: (Player) -> Unit
+)  {
     var nombre by remember { mutableStateOf("") }
     var clase by remember { mutableStateOf("") }
     var especializacion by remember { mutableStateOf("") }
@@ -84,15 +88,19 @@ fun  AddPlayerScreen(
             Text("Agregar Jugador")
         }
     }
+    BackButton(navController)
+}
+
+@Composable
+fun BackButton(navController: NavController){
     Button(
         onClick = {navController.popBackStack()},
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = 16.dp)
+            .padding(top = 16.dp)
     ) {
         Text("Volver")
     }
-
 }
 
 
@@ -108,14 +116,6 @@ fun PlayerItem(player : Player, navController: NavController){
         Text("Nombre: ${player.nombre}", style = MaterialTheme.typography.bodyLarge, color = Color.White)
         Text("Clase: ${player.clase}", style = MaterialTheme.typography.bodyMedium, color = Color.White)
         Text("Especialización: ${player.especializacion}", style = MaterialTheme.typography.bodySmall, color = Color.White)
-        Button(
-            onClick = {navController.popBackStack()},
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 16.dp)
-        ) {
-            Text("Volver")
-        }
     }
 
 }

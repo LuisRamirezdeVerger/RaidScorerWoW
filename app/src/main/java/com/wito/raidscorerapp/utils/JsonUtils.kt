@@ -1,6 +1,7 @@
 package com.wito.raidscorerapp.utils
 
 import android.content.Context
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.wito.raidscorerapp.model.Player
@@ -29,5 +30,15 @@ object JsonUtils {
         val gson = Gson()
         val type = object : TypeToken<List<Player>>() { }.type
         return gson.fromJson(jsonString, type)
+    }
+
+    //Delete players from list
+    fun removePlayersAndSave(context: Context, player: Player, players: MutableList<Player>){
+        try {
+            players.remove(player)
+            savePlayersToFile(context, players)
+        } catch (e: Exception){
+            Log.e("RemovePlayer", "Error al eliminar el jugador, ${e.message}")
+        }
     }
 }

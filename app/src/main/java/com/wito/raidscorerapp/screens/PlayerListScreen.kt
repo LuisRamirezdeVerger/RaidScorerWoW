@@ -44,7 +44,7 @@ fun PlayerListScreen (players: List<Player>, navController: NavController){
 
             LazyColumn (
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxWidth()
             ) {
                 items(players){ player ->
                     PlayerItem(
@@ -66,15 +66,6 @@ fun PlayerListScreen (players: List<Player>, navController: NavController){
                 Text("Volver")
             }
 
-            Button(
-                onClick = { navController.navigate("main") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 16.dp)
-                    .background(Color.Red)
-            ) {
-                Text("Ir a MainActivity")
-            }
         }
         Spacer(modifier = Modifier.height(16.dp))
     }

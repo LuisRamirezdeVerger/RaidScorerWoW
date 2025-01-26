@@ -22,16 +22,18 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.wito.raidscorerapp.model.Player
 import com.wito.raidscorerapp.screens.AddPlayerScreen
+import com.wito.raidscorerapp.screens.EditPlayerScreen
 import com.wito.raidscorerapp.screens.PlayerListScreen
 import com.wito.raidscorerapp.screens.RemovePlayerScreen
 import com.wito.raidscorerapp.ui.theme.RaidScorerAppTheme
 import com.wito.raidscorerapp.utils.JsonUtils
-//import kotlin.coroutines.jvm.internal.CompletedContinuation.context
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +50,7 @@ class MainActivity : ComponentActivity() {
 fun MainNavGraph(){
     val navController = rememberNavController()
     val context = LocalContext.current
-    val players = rememberSaveable{ mutableListOf<Player>() }
+    val players = remember{ mutableListOf<Player>() }
 
     //Load players from JSON
     LaunchedEffect(Unit) {
@@ -89,6 +91,29 @@ fun MainNavGraph(){
                     JsonUtils.removePlayersAndSave(context, player, players)
                 }
             )
+        }
+
+        composable ("edit_player/{playerName}",
+            arguments = listOf(navArgument("playerName") { type = NavType.StringType })
+        ){ backStackEntry ->
+            val playerName = backStackEntry.arguments?.getString("playerName")
+            val player = players.find { it.nombre == playerName }
+           if (player != null){
+               EditPlayerScreen(
+                   player = player,
+                   onEditPlayer = { updatedPlayer ->
+                       val index = players.indexOf(player)
+                       if (index != -1){
+                           players[index] = updatedPlayer
+                           JsonUtils.savePlayersToFile(context, players)
+                       }
+                        navController.popBackStack()
+                   }
+               )
+           } else {
+               Text("Jugador no encontrado. ")
+           }
+
         }
     }
 }

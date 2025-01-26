@@ -9,19 +9,19 @@ import java.io.File
 
 object JsonUtils {
 
-    private const val FILE_NAME = "players.json"
+    private const val JSON = "players.json"
 
     //Save player list on JSON file
     fun savePlayersToFile (context: Context, players: List<Player>){
         val gson = Gson()
         val jsonString = gson.toJson(players)
-        val file = File(context.filesDir, FILE_NAME)
+        val file = File(context.filesDir, JSON)
         file.writeText(jsonString)
     }
 
     //Load player list from JSON
     fun loadPlayersFromFile(context: Context): List<Player>{
-        val file = File(context.filesDir, FILE_NAME)
+        val file = File(context.filesDir, JSON)
         if (!file.exists()){
             return emptyList()
         }

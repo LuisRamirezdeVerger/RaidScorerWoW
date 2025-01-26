@@ -23,6 +23,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -66,6 +67,11 @@ fun MainNavGraph(){
                 players = players
             )
         }
+
+        composable("main") {
+            MainActivity()
+        }
+
         composable("add player") {
             AddPlayerScreen(
                 navController = navController,
@@ -135,9 +141,9 @@ fun PlayerItem(player : Player){
             .background(MaterialTheme.colorScheme.surface)
             .padding(16.dp)
     ) {
-        Text("Nombre: ${player.nombre}", style = MaterialTheme.typography.bodyLarge)
-        Text("Clase: ${player.clase}", style = MaterialTheme.typography.bodyMedium)
-        Text("Especialización: ${player.especializacion}", style = MaterialTheme.typography.bodySmall)
+        Text("Nombre: ${player.nombre}", style = MaterialTheme.typography.bodyLarge, color = Color.White)
+        Text("Clase: ${player.clase}", style = MaterialTheme.typography.bodyMedium, color = Color.White)
+        Text("Especialización: ${player.especializacion}", style = MaterialTheme.typography.bodySmall, color = Color.White)
 
 
     }

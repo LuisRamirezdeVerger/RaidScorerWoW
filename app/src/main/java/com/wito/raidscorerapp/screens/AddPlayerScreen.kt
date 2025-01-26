@@ -1,6 +1,7 @@
 package com.wito.raidscorerapp.screens
 
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
@@ -72,7 +73,7 @@ fun  AddPlayerScreen(
                 if (nombre.isNotBlank() && clase.isNotBlank() && especializacion.isNotBlank()){
                     onAddPlayer (Player(nombre, clase, especializacion))
                     Toast.makeText(context,"Jugador $nombre agregado correctamente", Toast.LENGTH_SHORT).show()
-                    // Navegamos de regreso a la pantalla principal
+                    // Navigate back to Main Screen
                     navController.popBackStack()
                 } else {
                     Toast.makeText(context,"Faltan campos por completar", Toast.LENGTH_SHORT).show()
@@ -82,6 +83,23 @@ fun  AddPlayerScreen(
         ) {
             Text("Agregar Jugador")
         }
+    }
+}
+
+@Composable
+fun PlayerItem(player : Player){
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+            .background(MaterialTheme.colorScheme.surface)
+            .padding(16.dp)
+    ) {
+        Text("Nombre: ${player.nombre}", style = MaterialTheme.typography.bodyLarge, color = Color.White)
+        Text("Clase: ${player.clase}", style = MaterialTheme.typography.bodyMedium, color = Color.White)
+        Text("Especialización: ${player.especializacion}", style = MaterialTheme.typography.bodySmall, color = Color.White)
+
+
     }
 }
 

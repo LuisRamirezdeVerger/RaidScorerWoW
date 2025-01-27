@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">RaidScorerApp</string>
-    <string name="back">volver</string>
+    <string name="back">Back</string>
     <string name="add_player">Add player</string>">
     <string name="delete_plater">Delete player</string>">
     <string name="list_players">List players</string>">

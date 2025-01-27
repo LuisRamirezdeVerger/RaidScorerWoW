@@ -11,6 +11,7 @@ composeBom = "2024.04.01"
 navigationCompose = "2.8.5"
 navigationRuntimeKtx = "2.8.5"
 constraintlayoutComposeAndroid = "1.1.0"
+roomKtx = "2.6.1"
 
 [libraries]
 gson = "com.google.code.gson:gson:2.10.1"
@@ -31,6 +32,7 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
 androidx-constraintlayout-compose-android = { group = "androidx.constraintlayout", name = "constraintlayout-compose-android", version.ref = "constraintlayoutComposeAndroid" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

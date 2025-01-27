@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.room.util.copy
 import com.wito.raidscorerapp.model.Player
 import com.wito.raidscorerapp.utils.classColors
+import com.wito.raidscorerapp.utils.ClassDropdown
 
 
 @Composable
@@ -67,33 +68,43 @@ fun EditPlayerScreen(
 
 
         //Class dropdown
+        ClassDropdown(
+            selectedClass = clase,
+            onClassSelected = { selectedClass ->
+                clase = selectedClass
+                selectedColor = classColors[selectedClass] ?: Color.White
+            },
+            modifier = Modifier.fillMaxWidth()
+        )
 
-        Box{
-            OutlinedTextField(
-                value = clase,
-                onValueChange = {}, //There's no manual change
-                label = { Text("Clase") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { dropDownExpanded = true },
-                readOnly = true
-            )
-            DropdownMenu(
-                expanded = dropDownExpanded,
-                onDismissRequest = { dropDownExpanded = false }
-            ) {
-                classColors.keys.forEach { availableClass ->
-                    DropdownMenuItem(
-                        text = { Text(availableClass) },
-                        onClick = {
-                            clase = availableClass
-                            selectedColor = classColors[availableClass] ?: Color.White
-                            dropDownExpanded = false
-                        }
-                    )
-                }
-            }
-        }
+
+
+        //Box{
+        //    OutlinedTextField(
+        //        value = clase,
+        //        onValueChange = {}, //There's no manual change
+        //        label = { Text("Clase") },
+        //        modifier = Modifier
+        //            .fillMaxWidth()
+        //            .clickable { dropDownExpanded = true },
+        //        readOnly = true
+        //    )
+        //    DropdownMenu(
+        //        expanded = dropDownExpanded,
+        //        onDismissRequest = { dropDownExpanded = false }
+        //    ) {
+        //        classColors.keys.forEach { availableClass ->
+        //            DropdownMenuItem(
+        //                text = { Text(availableClass) },
+        //                onClick = {
+        //                    clase = availableClass
+        //                    selectedColor = classColors[availableClass] ?: Color.White
+        //                    dropDownExpanded = false
+        //                }
+        //            )
+        //        }
+        //    }
+        //}
 
 
 

@@ -20,7 +20,8 @@ import com.wito.raidscorerapp.R
 @Composable
 fun ClassDropdown(
     selectedClass: String,
-    onClassSelected: (String) -> Unit
+    onClassSelected: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -28,12 +29,10 @@ fun ClassDropdown(
     Box {
         OutlinedTextField(
             value = selectedClass,
-            onValueChange = {}, //There's no manual change
+            onValueChange = {}, //There's no manual change, just read
             readOnly = true,
             label = { Text("Clase") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable { expanded = true },
+            modifier = Modifier.clickable { expanded = true },
         )
 
         DropdownMenu(
@@ -42,11 +41,12 @@ fun ClassDropdown(
         ) {
             classColors.keys.forEach { clase ->
                 DropdownMenuItem(
-                    text = { Text(clase) },
+                    //text = { Text(clase) },
                     onClick = {
                         onClassSelected(clase)
                         expanded = false
-                    }
+                    },
+                    text = { Text(clase) }
                 )
             }
         }

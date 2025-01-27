@@ -1,11 +1,15 @@
 package com.wito.raidscorerapp.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Slider
@@ -17,9 +21,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.room.util.copy
 import com.wito.raidscorerapp.model.Player
+import com.wito.raidscorerapp.utils.classColors
 
 
 @Composable
@@ -30,6 +36,9 @@ fun EditPlayerScreen(
     var nombre by remember { mutableStateOf(player.nombre) }
     var clase by remember { mutableStateOf(player.clase) }
     var especializacion by remember { mutableStateOf(player.especializacion) }
+
+    var dropDownExpanded by remember { mutableStateOf(false) }
+    var selectedColor by remember { mutableStateOf(classColors[clase]?: Color.White) }
 
     //Criteria
     var puntualidad by remember { mutableFloatStateOf(player.puntualidad.toFloat()) }
@@ -56,12 +65,37 @@ fun EditPlayerScreen(
             modifier = Modifier.fillMaxWidth()
         )
 
-        OutlinedTextField(
-            value = clase,
-            onValueChange = {clase = it},
-            label = { Text("Clase") },
-            modifier = Modifier.fillMaxWidth()
-        )
+
+        //Class dropdown
+
+        Box{
+            OutlinedTextField(
+                value = clase,
+                onValueChange = {}, //There's no manual change
+                label = { Text("Clase") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { dropDownExpanded = true },
+                readOnly = true
+            )
+            DropdownMenu(
+                expanded = dropDownExpanded,
+                onDismissRequest = { dropDownExpanded = false }
+            ) {
+                classColors.keys.forEach { availableClass ->
+                    DropdownMenuItem(
+                        text = { Text(availableClass) },
+                        onClick = {
+                            clase = availableClass
+                            selectedColor = classColors[availableClass] ?: Color.White
+                            dropDownExpanded = false
+                        }
+                    )
+                }
+            }
+        }
+
+
 
         OutlinedTextField(
             value = especializacion,

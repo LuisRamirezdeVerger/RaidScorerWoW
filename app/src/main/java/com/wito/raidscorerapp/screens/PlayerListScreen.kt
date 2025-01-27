@@ -1,6 +1,7 @@
 package com.wito.raidscorerapp.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -51,6 +52,8 @@ fun PlayerListScreen (players: MutableList<Player>, navController: NavController
             ) {
                 items(players){ player ->
 
+                    val puntuacionFinal = player.calcularPuntuacionFinal()
+
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -71,6 +74,7 @@ fun PlayerListScreen (players: MutableList<Player>, navController: NavController
                                 Text(text = "Nombre: ${player.nombre}")
                                 Text(text = "Clase: ${player.clase}")
                                 Text(text = "Especialización: ${player.especializacion}")
+                                Text(text = "Puntuación final: ${"%.2f".format(puntuacionFinal)}")
                             }
                             Row {
                                 Button(
@@ -83,14 +87,6 @@ fun PlayerListScreen (players: MutableList<Player>, navController: NavController
                             }
                         }
                     }
-
-                    //PlayerItem(
-                    //    player = player,
-                    //    modifier = Modifier
-                    //        .fillMaxWidth()
-                    //        .background(Color.White)
-                    //        .padding(8.dp)
-                    //    )
                 }
             }
             if (players.isEmpty()){

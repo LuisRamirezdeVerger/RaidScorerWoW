@@ -2,6 +2,6 @@
 <resources>
     <string name="back">Volver</string>
     <string name="add_player">Agregar jugador</string>
-    <string name="delete_plater">Eliminar jugador</string>
+    <string name="delete_player">Eliminar jugador</string>
     <string name="list_players">Listar jugadores</string>
 </resources>

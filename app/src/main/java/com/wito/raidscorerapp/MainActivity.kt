@@ -30,6 +30,7 @@ import androidx.navigation.navArgument
 import com.wito.raidscorerapp.model.Player
 import com.wito.raidscorerapp.screens.AddPlayerScreen
 import com.wito.raidscorerapp.screens.EditPlayerScreen
+import com.wito.raidscorerapp.screens.PlayerDetailScreen
 import com.wito.raidscorerapp.screens.PlayerListScreen
 import com.wito.raidscorerapp.screens.RemovePlayerScreen
 import com.wito.raidscorerapp.ui.theme.RaidScorerAppTheme
@@ -91,6 +92,22 @@ fun MainNavGraph(){
                     JsonUtils.removePlayersAndSave(context, player, players)
                 }
             )
+        }
+
+        composable(
+            "player_detail/{playerName}",
+            arguments = listOf(navArgument("playerName") {type = NavType.StringType })
+        ) { backStackEntry ->  
+            val playerName = backStackEntry.arguments?.getString("playerName")
+            val player = players.find { it.nombre == playerName }
+            if (player != null){
+                PlayerDetailScreen(
+                    player = player,
+                    onBack = {navController.popBackStack()}
+                )
+            } else {
+                Text("Jugador no encontrado.")
+            }
         }
 
         composable ("edit_player/{playerName}",

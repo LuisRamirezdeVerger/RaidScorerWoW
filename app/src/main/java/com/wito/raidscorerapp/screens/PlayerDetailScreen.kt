@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.wito.raidscorerapp.model.Player
 
 
+
 @Composable
 fun PlayerDetailScreen(
     player : Player,
@@ -52,7 +53,7 @@ fun PlayerDetailScreen(
 
         //Back Button
         Button(
-            onClick = {onBack},
+            onClick = {onBack()},
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Volver")

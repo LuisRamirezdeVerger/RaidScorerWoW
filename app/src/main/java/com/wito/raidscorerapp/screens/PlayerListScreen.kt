@@ -97,7 +97,7 @@ fun PlayerListScreen (players: MutableList<Player>, navController: NavController
             }
 
             Button(
-                onClick = {navController.popBackStack()},
+                onClick = {navController.navigateUp()},
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 16.dp)

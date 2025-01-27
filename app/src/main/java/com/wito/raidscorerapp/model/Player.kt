@@ -11,10 +11,10 @@ data class Player (
     var actitud : Int = 0
 ) {
     private val pesos = mapOf(
-        "puntualidad" to 0.25,
-        "mecanicas" to 0.3,
-        "consumibles" to 0.2,
-        "actitud" to 0.2
+        "puntualidad" to 2.5,
+        "mecanicas" to 3,
+        "consumibles" to 2,
+        "actitud" to 2
     )
 
     fun calcularPuntuacionFinal(): Double {

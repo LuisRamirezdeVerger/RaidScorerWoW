@@ -57,7 +57,10 @@ fun PlayerListScreen (players: MutableList<Player>, navController: NavController
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 4.dp),
+                            .padding(vertical = 4.dp)
+                        .clickable {
+                        navController.navigate("player_detail/${player.nombre}")
+                    },
                         colors = CardDefaults.cardColors(
                             containerColor = MaterialTheme.colorScheme.surface,
                             contentColor = MaterialTheme.colorScheme.onSurface

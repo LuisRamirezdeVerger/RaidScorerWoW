@@ -75,7 +75,7 @@ fun RemovePlayerScreen(
                                     try {
                                         players.remove(player)
                                         onRemovePlayer(player)
-                                        Toast.makeText(context, "Jugador ${player.nombre} eliminado", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(context, "Jugador ${player.nombre} eliminado", Toast.LENGTH_LONG).show()
                                         run { navController.popBackStack() }
                                     } catch (e: Exception) {
                                         Log.e("RemovePlayer", "Error al eliminar el jugador, ${e.message}")

@@ -104,21 +104,21 @@ fun BackButton(navController: NavController){
 }
 
 
-@Composable
-fun PlayerItem(player : Player, navController: NavController){
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp)
-            .background(MaterialTheme.colorScheme.surface)
-            .padding(16.dp)
-    ) {
-        Text("Nombre: ${player.nombre}", style = MaterialTheme.typography.bodyLarge, color = Color.White)
-        Text("Clase: ${player.clase}", style = MaterialTheme.typography.bodyMedium, color = Color.White)
-        Text("Especialización: ${player.especializacion}", style = MaterialTheme.typography.bodySmall, color = Color.White)
-    }
-
-}
+//@Composable
+//fun PlayerItem(player : Player, navController: NavController){
+//    Column(
+//        modifier = Modifier
+//            .fillMaxWidth()
+//            .padding(vertical = 8.dp)
+//            .background(MaterialTheme.colorScheme.surface)
+//            .padding(16.dp)
+//    ) {
+//        Text("Nombre: ${player.nombre}", style = MaterialTheme.typography.bodyLarge, color = Color.White)
+//        Text("Clase: ${player.clase}", style = MaterialTheme.typography.bodyMedium, color = Color.White)
+//        Text("Especialización: ${player.especializacion}", style = MaterialTheme.typography.bodySmall, color = Color.White)
+//    }
+//
+//}
 
 @Preview(showBackground = true)
 @Composable

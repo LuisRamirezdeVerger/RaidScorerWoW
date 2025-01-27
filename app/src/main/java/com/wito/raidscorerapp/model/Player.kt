@@ -1,5 +1,7 @@
 package com.wito.raidscorerapp.model
 
+import androidx.compose.material3.DividerDefaults.color
+
 data class Player (
     val nombre : String,
     val clase : String,

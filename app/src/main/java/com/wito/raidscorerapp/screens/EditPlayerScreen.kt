@@ -12,6 +12,7 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -31,10 +32,10 @@ fun EditPlayerScreen(
     var especializacion by remember { mutableStateOf(player.especializacion) }
 
     //Criteria
-    var puntualidad by remember { mutableStateOf(player.puntualidad.toFloat()) }
-    var mecanicas by remember { mutableStateOf(player.mecanicas.toFloat()) }
-    var consumibles by remember { mutableStateOf(player.consumibles.toFloat()) }
-    var actitud by remember { mutableStateOf(player.actitud.toFloat()) }
+    var puntualidad by remember { mutableFloatStateOf(player.puntualidad.toFloat()) }
+    var mecanicas by remember { mutableFloatStateOf(player.mecanicas.toFloat()) }
+    var consumibles by remember { mutableFloatStateOf(player.consumibles.toFloat()) }
+    var actitud by remember { mutableFloatStateOf(player.actitud.toFloat()) }
 
     Column (
         verticalArrangement = Arrangement.spacedBy(16.dp),

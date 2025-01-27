@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 //import com.wito.raidscorerapp.PlayerItem
 import com.wito.raidscorerapp.model.Player
+import com.wito.raidscorerapp.utils.classColors
 
 @Composable
 fun PlayerListScreen (players: MutableList<Player>, navController: NavController){
@@ -51,7 +52,7 @@ fun PlayerListScreen (players: MutableList<Player>, navController: NavController
                     .fillMaxWidth()
             ) {
                 items(players){ player ->
-
+                    val playerColor = classColors[player.clase] ?: Color.White
                     val puntuacionFinal = player.calcularPuntuacionFinal()
 
                     Card(

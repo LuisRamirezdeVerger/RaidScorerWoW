@@ -12,9 +12,9 @@ data class Player (
 ) {
     private val pesos = mapOf(
         "puntualidad" to 2.5,
-        "mecanicas" to 3,
-        "consumibles" to 2,
-        "actitud" to 2
+        "mecanicas" to 3.0,
+        "consumibles" to 2.0,
+        "actitud" to 2.0
     )
 
     fun calcularPuntuacionFinal(): Double {

@@ -2,6 +2,7 @@ package com.wito.raidscorerapp.screens
 
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
@@ -20,7 +21,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.wito.raidscorerapp.model.Player
 import com.wito.raidscorerapp.screens.AddPlayerScreen
+import com.wito.raidscorerapp.utils.classColors
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddPlayerScreen(
     navController: NavController,
@@ -30,6 +33,11 @@ fun AddPlayerScreen(
     var clase by remember { mutableStateOf("") }
     var especializacion by remember { mutableStateOf("") }
     val context = LocalContext.current
+
+    //Dropdown control
+    var dropDownExpanded by remember { mutableStateOf(false) }
+    val availableClass = listOf("Guerrero", "Mago", "Sacerdote", "Cazador", "Druida")
+    var selectedColor by remember { mutableStateOf(Color.White) }
 
     Column(
         modifier = Modifier
@@ -51,13 +59,47 @@ fun AddPlayerScreen(
 
         Spacer (modifier = Modifier.height(8.dp))
 
-            //Class field
-        TextField(
-            value = clase,
-            onValueChange = {clase = it},
-            label = { Text("Clase") },
-            modifier = Modifier.fillMaxWidth()
-        )
+            //Dropdown Class field
+        Box(modifier = Modifier.fillMaxWidth()){
+            TextField (
+                value = clase,
+                onValueChange = {},
+                label = { Text("Clase") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { dropDownExpanded = true },
+                readOnly = true,
+                colors = TextFieldDefaults.textFieldColors(
+                    containerColor = selectedColor,
+                    disabledTextColor = Color.Black
+                )
+            )
+
+            DropdownMenu(
+                expanded = dropDownExpanded,
+                onDismissRequest = { dropDownExpanded = false}
+            ) {
+                availableClass.forEach{availableClass ->
+                    DropdownMenuItem(
+                        text = { Text (availableClass)},
+                        onClick = {
+                            clase = availableClass
+                            selectedColor = classColors[availableClass] ?: Color.White
+                            dropDownExpanded = false
+                        }
+                    )
+                }
+            }
+        }
+    }
+
+
+        //TextField(
+        //    value = clase,
+        //    onValueChange = {clase = it},
+        //    label = { Text("Clase") },
+        //    modifier = Modifier.fillMaxWidth()
+        //)
 
         Spacer (modifier = Modifier.height(8.dp))
 
@@ -87,9 +129,10 @@ fun AddPlayerScreen(
         ) {
             Text("Agregar Jugador")
         }
-    }
     BackButton(navController)
-}
+    }
+
+
 
 @Composable
 fun BackButton(navController: NavController){

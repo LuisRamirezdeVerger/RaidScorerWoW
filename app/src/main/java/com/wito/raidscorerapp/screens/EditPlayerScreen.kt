@@ -34,18 +34,18 @@ fun EditPlayerScreen(
     player: Player,
     onEditPlayer: (Player) -> Unit
 ){
-    var nombre by remember { mutableStateOf(player.nombre) }
-    var clase by remember { mutableStateOf(player.clase) }
-    var especializacion by remember { mutableStateOf(player.especializacion) }
+    var name by remember { mutableStateOf(player.name) }
+    var classWoW by remember { mutableStateOf(player.classWoW) }
+    var specialization by remember { mutableStateOf(player.specialization) }
 
     var dropDownExpanded by remember { mutableStateOf(false) }
-    var selectedColor by remember { mutableStateOf(classColors[clase]?: Color.White) }
+    var selectedColor by remember { mutableStateOf(classColors[classWoW]?: Color.White) }
 
     //Criteria
-    var puntualidad by remember { mutableFloatStateOf(player.puntualidad.toFloat()) }
-    var mecanicas by remember { mutableFloatStateOf(player.mecanicas.toFloat()) }
-    var consumibles by remember { mutableFloatStateOf(player.consumibles.toFloat()) }
-    var actitud by remember { mutableFloatStateOf(player.actitud.toFloat()) }
+    var punctuality by remember { mutableFloatStateOf(player.punctuality.toFloat()) }
+    var mechanics by remember { mutableFloatStateOf(player.mechanics.toFloat()) }
+    var consumables by remember { mutableFloatStateOf(player.consumables.toFloat()) }
+    var attitude by remember { mutableFloatStateOf(player.attitude.toFloat()) }
 
     Column (
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -60,8 +60,8 @@ fun EditPlayerScreen(
         )
 
         OutlinedTextField(
-            value = nombre,
-            onValueChange = {nombre = it},
+            value = name,
+            onValueChange = {name = it},
             label = { Text("Nombre") },
             modifier = Modifier.fillMaxWidth()
         )
@@ -69,9 +69,9 @@ fun EditPlayerScreen(
 
         //Class dropdown
         ClassDropdown(
-            selectedClass = clase,
+            selectedClass = classWoW,
             onClassSelected = { selectedClass ->
-                clase = selectedClass
+                classWoW = selectedClass
                 selectedColor = classColors[selectedClass] ?: Color.White
             },
             modifier = Modifier.fillMaxWidth()
@@ -109,8 +109,8 @@ fun EditPlayerScreen(
 
 
         OutlinedTextField(
-            value = especializacion,
-            onValueChange = {especializacion = it},
+            value = specialization,
+            onValueChange = {specialization = it},
             label = { Text("Especialización") },
             modifier = Modifier.fillMaxWidth()
         )
@@ -118,38 +118,38 @@ fun EditPlayerScreen(
         //Slider criteria selection
         CriterioSlider(
             label = "Puntualidad",
-            value = puntualidad,
-            onValueChange = {puntualidad = it}
+            value = punctuality,
+            onValueChange = {punctuality = it}
         )
 
         CriterioSlider(
             label = "Mecanicas",
-            value = mecanicas,
-            onValueChange = {mecanicas = it}
+            value = mechanics,
+            onValueChange = {mechanics = it}
         )
 
         CriterioSlider(
             label = "Consumibles",
-            value = consumibles,
-            onValueChange = {consumibles = it}
+            value = consumables,
+            onValueChange = {consumables = it}
         )
 
         CriterioSlider(
             label = "Actitud",
-            value = actitud,
-            onValueChange = {actitud = it}
+            value = attitude,
+            onValueChange = {attitude = it}
         )
 
         Button(
             onClick = {
                 val updatedPlayer = player.copy(
-                    nombre = nombre,
-                    clase = clase,
-                    especializacion = especializacion,
-                    puntualidad = puntualidad.toInt(),
-                    mecanicas = mecanicas.toInt(),
-                    consumibles = consumibles.toInt(),
-                    actitud = actitud.toInt()
+                    name = name,
+                    classWoW = classWoW,
+                    specialization = specialization,
+                    punctuality = punctuality.toInt(),
+                    mechanics = mechanics.toInt(),
+                    consumables = consumables.toInt(),
+                    attitude = attitude.toInt()
                     )
                 onEditPlayer(updatedPlayer)
             },

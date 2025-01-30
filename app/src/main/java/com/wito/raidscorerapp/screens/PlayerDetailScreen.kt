@@ -27,27 +27,27 @@ fun PlayerDetailScreen(
             .padding(16.dp)
     ){
         Text(
-            text = "Detalles de ${player.nombre}",
+            text = "Detalles de ${player.name}",
             style = MaterialTheme.typography.headlineMedium
         )
         //Individual criteria
         Text(
-            text = "Puntualidad: ${player.puntualidad}",
+            text = "Puntualidad: ${player.punctuality}",
             style = MaterialTheme.typography.headlineMedium
         )
 
         Text(
-            text = "Mecánicas: ${player.mecanicas}",
+            text = "Mecánicas: ${player.mechanics}",
             style = MaterialTheme.typography.headlineMedium
         )
 
         Text(
-            text = "Consumibles: ${player.consumibles}",
+            text = "Consumibles: ${player.consumables}",
             style = MaterialTheme.typography.headlineMedium
         )
 
         Text(
-            text = "Actitud: ${player.actitud}",
+            text = "Actitud: ${player.attitude}",
             style = MaterialTheme.typography.headlineMedium
         )
 

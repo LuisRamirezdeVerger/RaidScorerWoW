@@ -66,16 +66,16 @@ fun RemovePlayerScreen(
                             horizontalArrangement = Arrangement.SpaceBetween
                         ){
                             Column {
-                                Text(text = "Nombre: ${player.nombre}")
-                                Text(text = "Nombre: ${player.clase}")
-                                Text(text = "Nombre: ${player.especializacion}")
+                                Text(text = "Nombre: ${player.name}")
+                                Text(text = "Nombre: ${player.classWoW}")
+                                Text(text = "Nombre: ${player.specialization}")
                             }
                             Button(
                                 onClick = {
                                     try {
                                         players.remove(player)
                                         onRemovePlayer(player)
-                                        Toast.makeText(context, "Jugador ${player.nombre} eliminado", Toast.LENGTH_LONG).show()
+                                        Toast.makeText(context, "Jugador ${player.name} eliminado", Toast.LENGTH_LONG).show()
                                         run { navController.popBackStack() }
                                     } catch (e: Exception) {
                                         Log.e("RemovePlayer", "Error al eliminar el jugador, ${e.message}")

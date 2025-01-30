@@ -26,9 +26,9 @@ fun AddPlayerScreen(
     navController: NavController,
     onAddPlayer: (Player) -> Unit
 )  {
-    var nombre by remember { mutableStateOf("") }
-    var clase by remember { mutableStateOf("") }
-    var especializacion by remember { mutableStateOf("") }
+    var name by remember { mutableStateOf("") }
+    var classWoW by remember { mutableStateOf("") }
+    var specialization by remember { mutableStateOf("") }
     val context = LocalContext.current
 
     Column(
@@ -43,8 +43,8 @@ fun AddPlayerScreen(
 
             //Name Field
         TextField(
-            value = nombre,
-            onValueChange = {nombre = it},
+            value = name,
+            onValueChange = {name = it},
             label = { Text("Nombre") },
             modifier = Modifier.fillMaxWidth()
         )
@@ -53,8 +53,8 @@ fun AddPlayerScreen(
 
             //Class field
         TextField(
-            value = clase,
-            onValueChange = {clase = it},
+            value = classWoW,
+            onValueChange = {classWoW = it},
             label = { Text("Clase") },
             modifier = Modifier.fillMaxWidth()
         )
@@ -63,8 +63,8 @@ fun AddPlayerScreen(
 
             //Spec field
         TextField(
-            value = especializacion,
-            onValueChange = {especializacion = it},
+            value = specialization,
+            onValueChange = {specialization = it},
             label = { Text("Especialización") },
             modifier = Modifier.fillMaxWidth()
         )
@@ -74,9 +74,9 @@ fun AddPlayerScreen(
             //Add player button
         Button(
             onClick = {
-                if (nombre.isNotBlank() && clase.isNotBlank() && especializacion.isNotBlank()){
-                    onAddPlayer (Player(nombre, clase, especializacion))
-                    Toast.makeText(context,"Jugador $nombre agregado correctamente", Toast.LENGTH_SHORT).show()
+                if (name.isNotBlank() && classWoW.isNotBlank() && specialization.isNotBlank()){
+                    onAddPlayer (Player(name, classWoW, specialization))
+                    Toast.makeText(context,"Jugador $name agregado correctamente", Toast.LENGTH_SHORT).show()
                     // Navigate back to Main Screen
                     navController.popBackStack()
                 } else {

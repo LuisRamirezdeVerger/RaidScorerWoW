@@ -77,7 +77,7 @@ fun MainNavGraph(){
                 onAddPlayer = {player ->
                     players.add(player)
                     JsonUtils.savePlayersToFile(context, players)
-                    println("Jugador agregado: ${player.nombre}, ${player.clase}, ${player.especializacion}")
+                    println("Jugador agregado: ${player.name}, ${player.classWoW}, ${player.specialization}")
             })
         }
         composable("list players") {
@@ -99,7 +99,7 @@ fun MainNavGraph(){
             arguments = listOf(navArgument("playerName") {type = NavType.StringType })
         ) { backStackEntry ->  
             val playerName = backStackEntry.arguments?.getString("playerName")
-            val player = players.find { it.nombre == playerName }
+            val player = players.find { it.name == playerName }
             if (player != null){
                 PlayerDetailScreen(
                     player = player,
@@ -114,7 +114,7 @@ fun MainNavGraph(){
             arguments = listOf(navArgument("playerName") { type = NavType.StringType })
         ){ backStackEntry ->
             val playerName = backStackEntry.arguments?.getString("playerName")
-            val player = players.find { it.nombre == playerName }
+            val player = players.find { it.name == playerName }
            if (player != null){
                EditPlayerScreen(
                    player = player,

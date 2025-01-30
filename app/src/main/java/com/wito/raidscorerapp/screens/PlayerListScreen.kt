@@ -52,15 +52,16 @@ fun PlayerListScreen (players: MutableList<Player>, navController: NavController
                     .fillMaxWidth()
             ) {
                 items(players){ player ->
-                    val playerColor = classColors[player.clase] ?: Color.White
-                    val puntuacionFinal = player.calcularPuntuacionFinal()
+                    val playerColor = classColors[player.classWoW] ?: Color.White
+
+                    //val finalScore = player.calculateFinalScore()
 
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 4.dp)
                         .clickable {
-                        navController.navigate("player_detail/${player.nombre}")
+                        navController.navigate("player_detail/${player.name}")
                     },
                         colors = CardDefaults.cardColors(
                             containerColor = MaterialTheme.colorScheme.surface,
@@ -75,15 +76,15 @@ fun PlayerListScreen (players: MutableList<Player>, navController: NavController
                             horizontalArrangement = Arrangement.SpaceBetween
                         ){
                             Column {
-                                Text(text = "Nombre: ${player.nombre}")
-                                Text(text = "Clase: ${player.clase}")
-                                Text(text = "Especialización: ${player.especializacion}")
-                                Text(text = "Puntuación final: ${"%.2f".format(puntuacionFinal)}")
+                                Text(text = "Nombre: ${player.name}")
+                                Text(text = "Clase: ${player.classWoW}")
+                                Text(text = "Especialización: ${player.specialization}")
+                                Text(text = "Puntuación final: ${"%.2f".format(player.getTotalScore())}")
                             }
                             Row {
                                 Button(
                                     onClick = {
-                                        navController.navigate("edit_player/${player.nombre}")
+                                        navController.navigate("edit_player/${player.name}")
                                     }
                                 ) {
                                     Text("Editar")

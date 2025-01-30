@@ -12,20 +12,25 @@ data class Player (
     var consumables : Int = 0,
     var attitude : Int = 0
 ) {
-    //private val pesos = mapOf(
-    //    "puntualidad" to 2.5,
-    //    "mecanicas" to 3.0,
-    //    "consumibles" to 2.0,
-    //    "actitud" to 2.0
-    //)
+    private val scoreHistory: MutableList<Double> = mutableListOf()
 
-    fun calculatFinalScore(): Double {
-        return (
-                punctuality * ScoreWeights.punctuality +
-                        mechanics * ScoreWeights.mechanics +
-                        consumables * ScoreWeights.consumables +
-                        attitude * ScoreWeights.attitude
+    fun calculateFinalScore(weights: Map<String, Double>): Double {
+        val score = (
+                punctuality * weights["punctuality"]!! +
+                        mechanics * weights["mechanics"]!! +
+                        consumables * weights["consumables"]!! +
+                        attitude * weights["attitude"]!!
                 )
+        scoreHistory.add(score)
+        return score
+    }
+
+    fun getTotalScore(): Double {
+        return scoreHistory.sum()
+    }
+
+    fun getAverageScore(): Double {
+        return if (scoreHistory.isNotEmpty()) scoreHistory.average() else 0.0
     }
 }
 

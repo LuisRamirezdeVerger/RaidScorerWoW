@@ -29,6 +29,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.wito.raidscorerapp.model.Player
 import com.wito.raidscorerapp.screens.AddPlayerScreen
+import com.wito.raidscorerapp.screens.ConfigureWeightsScreen
 import com.wito.raidscorerapp.screens.EditPlayerScreen
 import com.wito.raidscorerapp.screens.PlayerDetailScreen
 import com.wito.raidscorerapp.screens.PlayerListScreen
@@ -67,10 +68,12 @@ fun MainNavGraph(){
             )
         }
 
+        //Main screen
         composable("main") {
             MainActivity()
         }
 
+        //Add player screen
         composable("add player") {
             AddPlayerScreen(
                 navController = navController,
@@ -80,10 +83,13 @@ fun MainNavGraph(){
                     println("Jugador agregado: ${player.name}, ${player.classWoW}, ${player.specialization}")
             })
         }
+
+        //List players screen
         composable("list players") {
             PlayerListScreen(players = players, navController = navController)
         }
 
+        //Delete players screen
         composable("remove players") {
             RemovePlayerScreen(
                 players = players,
@@ -94,6 +100,7 @@ fun MainNavGraph(){
             )
         }
 
+        //Player details screen
         composable(
             "player_detail/{playerName}",
             arguments = listOf(navArgument("playerName") {type = NavType.StringType })
@@ -110,6 +117,7 @@ fun MainNavGraph(){
             }
         }
 
+        //Edit player screen
         composable ("edit_player/{playerName}",
             arguments = listOf(navArgument("playerName") { type = NavType.StringType })
         ){ backStackEntry ->
@@ -132,7 +140,18 @@ fun MainNavGraph(){
            }
 
         }
+
+        //Edit weights screen
+        composable("configure_weights") {
+            ConfigureWeightsScreen(
+                navController = navController,
+                onWeightsUpdated = { newWeights ->
+                    println("Pesos actualizados")
+                }
+            )
+        }
     }
+
 }
 
 @Composable
@@ -145,7 +164,9 @@ fun HomeScreen(navController: NavController, players: MutableList<Player>){
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp),
-            modifier = Modifier.fillMaxSize().padding(16.dp)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
         ) {
             Text(text = "Raid Scorer App",
                 modifier = Modifier.padding(bottom = 16.dp),
@@ -166,8 +187,15 @@ fun HomeScreen(navController: NavController, players: MutableList<Player>){
                 Text("Listar jugadores")
             }
 
-            Button(onClick = { navController.navigate("remove players") }) {
+            Button(onClick = { navController.navigate("remove players") },
+                modifier = Modifier.fillMaxWidth()) {
                 Text("Eliminar jugador")
+            }
+
+            Button(onClick = { navController.navigate("configure_weights")},
+                modifier = Modifier.fillMaxWidth().padding(16.dp)
+                ) {
+                Text("Configurar pesos de criterios")
             }
         }
     }

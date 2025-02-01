@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 //import com.wito.raidscorerapp.PlayerItem
 import com.wito.raidscorerapp.model.Player
+import com.wito.raidscorerapp.model.weights
 import com.wito.raidscorerapp.utils.classColors
 
 @Composable
@@ -47,66 +48,70 @@ fun PlayerListScreen (players: MutableList<Player>, navController: NavController
                 modifier = Modifier.padding(bottom = 16.dp)
             )
 
-            LazyColumn (
-                modifier = Modifier
-                    .fillMaxWidth()
-            ) {
-                items(players){ player ->
-                    val playerColor = classColors[player.classWoW] ?: Color.White
+            if (players.isEmpty()){
+                Text("No hay jugadores registrados aún")
+            } else {
 
-                    //val finalScore = player.calculateFinalScore()
+                LazyColumn (
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    items(players){ player ->
+                        //val playerColor = classColors[player.classWoW] ?: Color.White
+                        //val finalScore = player.calculateFinalScore()
 
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 4.dp)
-                        .clickable {
-                        navController.navigate("player_detail/${player.name}")
-                    },
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.surface,
-                            contentColor = MaterialTheme.colorScheme.onSurface
-                        )
-                    ){
-                        Row (
+                        Card(
                             modifier = Modifier
-                                .padding(16.dp)
-                                .fillMaxWidth(),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween
+                                .fillMaxWidth()
+                                .padding(vertical = 4.dp)
+                                .clickable {
+                                    //Navigate to player detail screen
+                                    navController.navigate("player_detail/${player.name}")
+                                },
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.surface,
+                                contentColor = MaterialTheme.colorScheme.onSurface
+                            )
                         ){
-                            Column {
-                                Text(text = "Nombre: ${player.name}")
-                                Text(text = "Clase: ${player.classWoW}")
-                                Text(text = "Especialización: ${player.specialization}")
-                                Text(text = "Puntuación final: ${"%.2f".format(player.getTotalScore())}")
-                            }
-                            Row {
-                                Button(
-                                    onClick = {
-                                        navController.navigate("edit_player/${player.name}")
+                            Row (
+                                modifier = Modifier
+                                    .padding(16.dp)
+                                    .fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ){
+                                Column {
+                                    Text(text = "Nombre: ${player.name}")
+                                    Text(text = "Clase: ${player.classWoW}")
+                                    Text(text = "Especialización: ${player.specialization}")
+                                    Text(text = "Puntuación final: ${"%.2f".format(player.calculateFinalScore(weights))}")
+                                }
+                                Row {
+                                    Button(
+                                        onClick = {
+                                            navController.navigate("edit_player/${player.name}")
+                                        }
+                                    ) {
+                                        Text("Editar")
                                     }
-                                ) {
-                                    Text("Editar")
                                 }
                             }
                         }
                     }
                 }
             }
-            if (players.isEmpty()){
-                Text("No hay jugadores registrados aún")
-            }
+
+
+
 
             Button(
-                onClick = {navController.navigateUp()},
+                onClick = { navController.navigateUp() },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 16.dp)
             ) {
                 Text("Volver")
             }
-
         }
         Spacer(modifier = Modifier.height(16.dp))
     }

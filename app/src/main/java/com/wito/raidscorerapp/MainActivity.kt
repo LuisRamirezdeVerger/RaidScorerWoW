@@ -69,9 +69,9 @@ fun MainNavGraph(){
         }
 
         //Main screen
-        composable("main") {
-            MainActivity()
-        }
+        //composable("main") {
+        //    MainActivity()
+        //}
 
         //Add player screen
         composable("add player") {

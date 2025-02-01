@@ -53,7 +53,7 @@ fun PlayerDetailScreen(
 
         //Back Button
         Button(
-            onClick = {onBack()},
+            onClick = onBack,
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Volver")

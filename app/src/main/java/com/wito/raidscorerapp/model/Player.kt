@@ -17,9 +17,9 @@ data class Player (
     fun calculateFinalScore(weights: Map<String, Double>): Double {
         val score = (
                 punctuality * weights["punctuality"]!! +
-                        mechanics * weights["mechanics"]!! +
-                        consumables * weights["consumables"]!! +
-                        attitude * weights["attitude"]!!
+                mechanics * weights["mechanics"]!! +
+                consumables * weights["consumables"]!! +
+                attitude * weights["attitude"]!!
                 )
         scoreHistory.add(score)
         return score

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
@@ -26,6 +27,8 @@ private val LightColorScheme = lightColorScheme(
     background = Color.White,
     onBackground = Color.Black
 
+
+
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
     surface = Color(0xFFFFFBFE),
@@ -37,6 +40,30 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
+//Colors based on WoW
+private val WoWLightColorScheme = lightColorScheme(
+    primary = Color(0xFFC79C6E),
+    onPrimary = Color(0xFF1C1C1C),
+    surface = Color(0xFFFAE6B1),
+    onSurface = Color.Black,
+    background = Color(0xFF003366),
+    onBackground = Color.White,
+)
+
+private val WoWDarkColorScheme = darkColorScheme(
+    primary = Color(0xFFC79C6E),
+    onPrimary = Color.Black,
+    surface = Color(0xFF1C1C1C),
+    onSurface = Color(0xFFFAE6B1),
+    background = Color(0xFF000000),
+    onBackground = Color(0xFFC79C6E)
+)
+
+// Font based on WoW
+private val WoWTypography = Typography(
+    titleLarge = Typography().titleLarge.copy(color = Color(0xFFC79C6E)),
+    bodyMedium = Typography().bodyMedium.copy(color = Color.White),
+)
 
 
 @Composable
@@ -56,9 +83,11 @@ fun RaidScorerAppTheme(
         else -> LightColorScheme
     }
 
+    val colors = if (darkTheme) WoWDarkColorScheme else WoWLightColorScheme
+
     MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
+        colorScheme = colors,
+        typography = WoWTypography,
         content = content
     )
 }

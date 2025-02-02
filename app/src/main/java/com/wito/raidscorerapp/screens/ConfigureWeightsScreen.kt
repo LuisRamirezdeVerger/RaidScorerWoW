@@ -97,7 +97,7 @@ fun ConfigureWeightsScreen (
                             "attitude" to ScoreWeights.attitude
                         )
                     )
-                    Toast.makeText(context,"Cambios realizados correctamente. ", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context,"Cambios realizados correctamente", Toast.LENGTH_SHORT).show()
                     //Back to previous screen
                     navController.popBackStack()
 
@@ -107,7 +107,7 @@ fun ConfigureWeightsScreen (
             },
             modifier = Modifier.padding(top = 16.dp)
         ) {
-            Text("Guardar pesos. ")
+            Text("Guardar pesos")
         }
     }
 }

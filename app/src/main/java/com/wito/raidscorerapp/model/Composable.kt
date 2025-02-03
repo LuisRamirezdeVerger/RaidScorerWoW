@@ -45,6 +45,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.unit.dp
 import com.wito.raidscorerapp.model.Player
+import com.wito.raidscorerapp.screens.ClassSelectionScreen
 
 
 @Composable
@@ -219,37 +220,6 @@ fun HomeScreen(navController: NavController, players: MutableList<Player>){
 }
 
 
-@Composable
-fun ClassSelectionScreen (
-    navController: NavController,
-    onClassSelected: (String) -> Unit
-){
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        Text(
-            text = "Selecciona una clase",
-            style = MaterialTheme.typography.headlineMedium,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
-
-        //Show classes list
-        wowClasses.forEach{ className ->
-            Button(
-                onClick = {
-                    onClassSelected(className) //Callback to selected class
-                    navController.popBackStack()
-                },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(className)
-            }
-        }
-    }
-}
 
 
 @Preview(showBackground = true)

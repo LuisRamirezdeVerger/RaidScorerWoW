@@ -50,7 +50,8 @@ fun ClassSelectionScreen (
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .border(2.dp, SolidColor(Color.Black), RoundedCornerShape(32.dp)).clip(RoundedCornerShape(8.dp)),
+                    .border(4.dp, SolidColor(Color.Black), RoundedCornerShape(32.dp)).clip(RoundedCornerShape(32.dp)),
+                shape = RoundedCornerShape(32.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = color, //Button background
                     contentColor = Color.Black

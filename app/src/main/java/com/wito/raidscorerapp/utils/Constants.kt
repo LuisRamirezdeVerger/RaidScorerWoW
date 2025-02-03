@@ -17,3 +17,18 @@ val classColors = mapOf(
     "Monje" to Color(0xFF00FF96),
     "Cazador de demonios" to Color(0xFFA330C9)
 )
+
+val wowClasses = listOf(
+    "Guerrero",
+    "Paladín",
+    "Cazador",
+    "Pícaro",
+    "Sacerdote",
+    "Caballero de la Muerte",
+    "Chamán",
+    "Mago",
+    "Brujo",
+    "Monje",
+    "Druida",
+    "Cazador de demonios"
+)

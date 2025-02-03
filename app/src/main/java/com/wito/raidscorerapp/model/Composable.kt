@@ -1,9 +1,6 @@
-package com.wito.raidscorerapp
+package com.wito.raidscorerapp.model
 
 import android.annotation.SuppressLint
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -27,7 +23,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.wito.raidscorerapp.model.Player
 import com.wito.raidscorerapp.screens.AddPlayerScreen
 import com.wito.raidscorerapp.screens.ConfigureWeightsScreen
 import com.wito.raidscorerapp.screens.EditPlayerScreen
@@ -37,16 +32,6 @@ import com.wito.raidscorerapp.screens.RemovePlayerScreen
 import com.wito.raidscorerapp.ui.theme.RaidScorerAppTheme
 import com.wito.raidscorerapp.utils.JsonUtils
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            RaidScorerAppTheme {
-                MainNavGraph()
-            }
-        }
-    }
-}
 
 @Composable
 fun MainNavGraph(){

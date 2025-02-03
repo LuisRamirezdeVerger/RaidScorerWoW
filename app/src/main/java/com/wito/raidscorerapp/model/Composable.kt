@@ -10,10 +10,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -30,7 +34,17 @@ import com.wito.raidscorerapp.screens.PlayerDetailScreen
 import com.wito.raidscorerapp.screens.PlayerListScreen
 import com.wito.raidscorerapp.screens.RemovePlayerScreen
 import com.wito.raidscorerapp.ui.theme.RaidScorerAppTheme
+import com.wito.raidscorerapp.Main
 import com.wito.raidscorerapp.utils.JsonUtils
+import com.wito.raidscorerapp.utils.wowClasses
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.unit.dp
+import com.wito.raidscorerapp.model.Player
 
 
 @Composable
@@ -38,6 +52,7 @@ fun MainNavGraph(){
     val navController = rememberNavController()
     val context = LocalContext.current
     val players = remember{ mutableListOf<Player>() }
+    var selectedClass by remember { mutableStateOf("") }
 
     //Load players from JSON
     LaunchedEffect(Unit) {
@@ -62,6 +77,11 @@ fun MainNavGraph(){
         composable("add player") {
             AddPlayerScreen(
                 navController = navController,
+                selectedClass = selectedClass,
+                onClassClick = {
+                    // navigate to class selection
+                    navController.navigate("select_class")
+                },
                 onAddPlayer = {player ->
                     players.add(player)
                     JsonUtils.savePlayersToFile(context, players)
@@ -69,7 +89,17 @@ fun MainNavGraph(){
             })
         }
 
-        //List players screen
+        composable("select_class") {
+            ClassSelectionScreen(
+                navController = navController,
+                onClassSelected = { className ->
+                    selectedClass = className // Update selected class
+                }
+            )
+        }
+
+
+            //List players screen
         composable("list players") {
             PlayerListScreen(players = players, navController = navController)
         }
@@ -136,12 +166,13 @@ fun MainNavGraph(){
             )
         }
     }
-
 }
 
+
+//Main Screen Design
 @Composable
 fun HomeScreen(navController: NavController, players: MutableList<Player>){
-        //Main Screen Design
+
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -185,6 +216,39 @@ fun HomeScreen(navController: NavController, players: MutableList<Player>){
         }
     }
 
+}
+
+
+@Composable
+fun ClassSelectionScreen (
+    navController: NavController,
+    onClassSelected: (String) -> Unit
+){
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Text(
+            text = "Selecciona una clase",
+            style = MaterialTheme.typography.headlineMedium,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+
+        //Show classes list
+        wowClasses.forEach{ className ->
+            Button(
+                onClick = {
+                    onClassSelected(className) //Callback to selected class
+                    navController.popBackStack()
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(className)
+            }
+        }
+    }
 }
 
 

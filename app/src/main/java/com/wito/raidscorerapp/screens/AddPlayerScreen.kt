@@ -24,6 +24,8 @@ import com.wito.raidscorerapp.screens.AddPlayerScreen
 @Composable
 fun AddPlayerScreen(
     navController: NavController,
+    selectedClass: String,
+    onClassClick: () -> Unit,
     onAddPlayer: (Player) -> Unit
 )  {
     var name by remember { mutableStateOf("") }
@@ -52,12 +54,12 @@ fun AddPlayerScreen(
         Spacer (modifier = Modifier.height(8.dp))
 
             //Class field
-        TextField(
-            value = classWoW,
-            onValueChange = {classWoW = it},
-            label = { Text("Clase") },
+        Button(
+            onClick = onClassClick,
             modifier = Modifier.fillMaxWidth()
-        )
+        ) {
+            Text(if (selectedClass.isEmpty()) "Seleccionar Clase" else "Clase: $selectedClass")
+        }
 
         Spacer (modifier = Modifier.height(8.dp))
 
@@ -125,6 +127,8 @@ fun BackButton(navController: NavController){
 fun PreviewAddPlayerScreen() {
     AddPlayerScreen(
         onAddPlayer = {},
-        navController = rememberNavController()
+        navController = rememberNavController(),
+        selectedClass = TODO(),
+        onClassClick = TODO()
     )
 }

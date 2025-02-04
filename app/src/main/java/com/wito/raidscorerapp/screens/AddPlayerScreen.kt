@@ -43,15 +43,6 @@ fun AddPlayerScreen(
 
         Spacer (modifier = Modifier.height(16.dp))
 
-            //Name Field
-        TextField(
-            value = name,
-            onValueChange = {name = it},
-            label = { Text("Nombre") },
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        Spacer (modifier = Modifier.height(8.dp))
 
             //Class field
         Button(
@@ -73,10 +64,20 @@ fun AddPlayerScreen(
 
         Spacer (modifier = Modifier.height(16.dp))
 
+        //Name Field
+        TextField(
+            value = name,
+            onValueChange = {name = it},
+            label = { Text("Nombre") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer (modifier = Modifier.height(8.dp))
+
             //Add player button
         Button(
             onClick = {
-                if (name.isNotBlank() && classWoW.isNotBlank() && specialization.isNotBlank()){
+                if (name.isNotBlank()){
                     onAddPlayer (Player(name, classWoW, specialization))
                     Toast.makeText(context,"Jugador $name agregado correctamente", Toast.LENGTH_SHORT).show()
                     // Navigate back to Main Screen

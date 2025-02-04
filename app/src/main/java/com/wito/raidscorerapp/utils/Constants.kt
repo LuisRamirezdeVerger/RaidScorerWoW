@@ -15,7 +15,8 @@ val classColors = mapOf(
     "Paladín" to Color(0xFFF58CBA),
     "Caballero de la muerte" to Color(0xFFC41F3B),
     "Monje" to Color(0xFF00FF96),
-    "Cazador de demonios" to Color(0xFFA330C9)
+    "Cazador de demonios" to Color(0xFFA330C9),
+    "Evocador" to Color(0xFF33937F)
 )
 
 val wowClasses = listOf(
@@ -30,5 +31,90 @@ val wowClasses = listOf(
     "Brujo",
     "Monje",
     "Druida",
-    "Cazador de demonios"
+    "Cazador de demonios",
+    "Evocador"
 )
+
+val classSpecializations = mapOf(
+    "Guerrero" to listOf("Armas", "Furia", "Protección"),
+    "Mago" to listOf("Fuego", "Escarcha", "Arcano"),
+    "Druida" to listOf("Equilibrio", "Feral", "Guardián", "Restauración"),
+    "Cazador" to listOf("Bestias", "Puntería", "Supervivencia"),
+    "Pícaro" to listOf("Asesinato", "Combate", "Sutileza"),
+    "Chamán" to listOf("Elemental", "Mejora", "Restauración"),
+    "Brujo" to listOf("Aflicción", "Demonología", "Destrucción"),
+    "Sacerdote" to listOf("Disciplina", "Sagrado", "Sombra"),
+    "Paladín" to listOf("Sagrado", "Protección", "Reprensión"),
+    "Caballero de la muerte" to listOf("Sangre", "Escarcha", "Profano"),
+    "Monje" to listOf("Maestro cervecero", "Tejido de niebla", "Viajero del viento"),
+    "Cazador de demonios" to listOf("Devastación", "Venganza"),
+    "Evocador" to listOf("Devastación", "Preservación", "Aumento")
+)
+
+val specializationRoles = mapOf(
+    // Guerrero
+    "Armas" to "DPS",
+    "Furia" to "DPS",
+    "Protección" to "Tank",
+
+    // Mago
+    "Fuego" to "DPS",
+    "Escarcha" to "DPS",
+    "Arcano" to "DPS",
+
+    // Druida
+    "Equilibrio" to "DPS",
+    "Feral" to "DPS",
+    "Guardián" to "Tank",
+    "Restauración" to "Healer",
+
+    // Cazador
+    "Bestias" to "DPS",
+    "Puntería" to "DPS",
+    "Supervivencia" to "DPS",
+
+    // Pícaro
+    "Asesinato" to "DPS",
+    "Combate" to "DPS",
+    "Sutileza" to "DPS",
+
+    // Chamán
+    "Elemental" to "DPS",
+    "Mejora" to "DPS",
+    "Restauración" to "Healer",
+
+    // Brujo
+    "Aflicción" to "DPS",
+    "Demonología" to "DPS",
+    "Destrucción" to "DPS",
+
+    // Sacerdote
+    "Disciplina" to "Healer",
+    "Sagrado" to "Healer",
+    "Sombra" to "DPS",
+
+    // Paladín
+    "Sagrado" to "Healer",
+    "Protección" to "Tank",
+    "Reprensión" to "DPS",
+
+    // Caballero de la muerte
+    "Sangre" to "Tank",
+    "Escarcha" to "DPS",
+    "Profano" to "DPS",
+
+    // Monje
+    "Maestro cervecero" to "Tank",
+    "Tejido de niebla" to "Healer",
+    "Viajero del viento" to "DPS",
+
+    // Cazador de demonios
+    "Devastación" to "DPS",
+    "Venganza" to "Tank",
+
+    // Evocador
+    "Devastación" to "DPS",
+    "Preservación" to "Healer",
+    "Aumento" to "DPS"
+)
+

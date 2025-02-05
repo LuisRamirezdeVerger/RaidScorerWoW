@@ -46,7 +46,7 @@ val classSpecializations = mapOf(
     "Sacerdote" to listOf("Disciplina", "Sagrado", "Sombra"),
     "Paladín" to listOf("Sagrado", "Protección", "Reprensión"),
     "Caballero de la muerte" to listOf("Sangre", "Escarcha", "Profano"),
-    "Monje" to listOf("Maestro cervecero", "Tejido de niebla", "Viajero del viento"),
+    "Monje" to listOf("Maestro cervecero", "Tejedor de niebla", "Viajero del viento"),
     "Cazador de demonios" to listOf("Devastación", "Venganza"),
     "Evocador" to listOf("Devastación", "Preservación", "Aumento")
 )

@@ -31,6 +31,7 @@ fun AddPlayerScreen(
     var name by remember { mutableStateOf("") }
     var classWoW by remember { mutableStateOf("") }
     var specialization by remember { mutableStateOf("") }
+    var secondarySpecilization by remember { mutableStateOf("") }
     val context = LocalContext.current
 
     Column(
@@ -78,7 +79,7 @@ fun AddPlayerScreen(
         Button(
             onClick = {
                 if (name.isNotBlank()){
-                    onAddPlayer (Player(name, classWoW, specialization))
+                    onAddPlayer (Player(name, classWoW, specialization, secondarySpecilization))
                     Toast.makeText(context,"Jugador $name agregado correctamente", Toast.LENGTH_SHORT).show()
                     // Navigate back to Main Screen
                     navController.popBackStack()

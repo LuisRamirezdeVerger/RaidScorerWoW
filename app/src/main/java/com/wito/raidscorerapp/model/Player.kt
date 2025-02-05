@@ -6,6 +6,7 @@ data class Player (
     val name : String,
     val classWoW : String,
     val specialization : String,
+    val secondarySpecilization: String,
     //Criterios
     var punctuality : Int = 0,
     var mechanics : Int = 0,

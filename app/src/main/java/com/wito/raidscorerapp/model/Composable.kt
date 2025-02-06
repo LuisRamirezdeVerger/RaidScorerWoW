@@ -227,8 +227,8 @@ fun HomeScreen(navController: NavController, players: MutableList<Player>){
 fun DefaultPreview() {
     @SuppressLint("UnrememberedMutableState")
     val examplePlayers = mutableStateListOf(
-        Player("Ejemplo1", "Clase1", "Especialización1"),
-        Player("Ejemplo2", "Clase2", "Especialización2")
+        Player("Ejemplo1", "Clase1", "Especialización1", "EspecializaciónSecundaria1"),
+        Player("Ejemplo2", "Clase2", "Especialización2", "EspecializaciónSecundaria1")
     )
     RaidScorerAppTheme {
         HomeScreen(

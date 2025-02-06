@@ -20,7 +20,9 @@ import com.wito.raidscorerapp.utils.classColors
 import com.wito.raidscorerapp.utils.wowClasses
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.draw.clip
 
 
@@ -32,7 +34,8 @@ fun ClassSelectionScreen (
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(

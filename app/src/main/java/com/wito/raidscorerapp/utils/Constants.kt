@@ -1,6 +1,8 @@
 package com.wito.raidscorerapp.utils
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import com.wito.raidscorerapp.R
 
 
 val classColors = mapOf(
@@ -115,6 +117,12 @@ val specializationRoles = mapOf(
     // Evocador
     "Devastación" to "DPS",
     "Preservación" to "Healer",
-    "Aumento" to "DPS"
+    "Aumento" to "Supp"
 )
 
+//val roleIcons = mapOf(
+//    "Tank" to painterResource(id = R.drawable.tank_icon),
+//    "DPS" to painterResource(id = R.drawable.dps_icon),
+//    "Healer" to painterResource(id = R.drawable.healer_icon),
+//    "Supp" to painterResource(id = R.drawable.augment_icon)
+//)

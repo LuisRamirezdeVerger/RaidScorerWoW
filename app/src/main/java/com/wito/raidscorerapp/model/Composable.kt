@@ -1,6 +1,7 @@
 package com.wito.raidscorerapp.model
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -43,7 +44,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.google.ai.client.generativeai.type.content
 import com.wito.raidscorerapp.model.Player
 import com.wito.raidscorerapp.screens.ClassSelectionScreen
 
@@ -166,6 +171,27 @@ fun MainNavGraph(){
                 }
             )
         }
+    }
+}
+
+//Background color design
+@Composable
+fun MysticGradientScreen(){
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(
+                brush = Brush.radialGradient(
+                    colors = listOf(Color(0xFFFFD700), Color(0xFF301934)),
+                    center = Offset(500f, 800f),
+                    radius = 1000f
+                )
+            )
+    ){
+        content(
+            role = TODO(),
+            init = TODO()
+        )
     }
 }
 

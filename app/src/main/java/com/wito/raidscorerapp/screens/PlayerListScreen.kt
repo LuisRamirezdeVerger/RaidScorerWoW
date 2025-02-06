@@ -83,7 +83,8 @@ fun PlayerListScreen (players: MutableList<Player>, navController: NavController
                                 Column {
                                     Text(text = "Nombre: ${player.name}")
                                     Text(text = "Clase: ${player.classWoW}")
-                                    Text(text = "Especialización: ${player.specialization}")
+                                    Text(text = "Especialización principal: ${player.specialization}")
+                                    Text(text = "Especialización secundaria: ${player.secondarySpecilization}")
                                     Text(text = "Puntuación final: ${"%.2f".format(player.calculateFinalScore(weights))}")
                                 }
                                 Row {

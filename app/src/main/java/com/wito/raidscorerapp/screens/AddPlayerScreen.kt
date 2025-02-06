@@ -14,10 +14,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.navigation.NavController
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
+import com.wito.raidscorerapp.R
 import com.wito.raidscorerapp.model.Player
 import com.wito.raidscorerapp.screens.AddPlayerScreen
 
@@ -65,6 +67,16 @@ fun AddPlayerScreen(
 
         Spacer (modifier = Modifier.height(16.dp))
 
+        //SecondarySpec field
+        TextField(
+            value = secondarySpecilization,
+            onValueChange = {secondarySpecilization = it},
+            label = { Text("Especialización secundaria") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer (modifier = Modifier.height(16.dp))
+
         //Name Field
         TextField(
             value = name,
@@ -103,7 +115,7 @@ fun BackButton(navController: NavController){
             .fillMaxWidth()
             .padding(top = 16.dp)
     ) {
-        Text("Volver")
+        Text(text = stringResource(id = R.string.back))
     }
 }
 

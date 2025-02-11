@@ -2,6 +2,8 @@ package com.wito.raidscorerapp.utils
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import com.wito.raidscorerapp.R
+
 //import com.wito.raidscorerapp.R
 
 

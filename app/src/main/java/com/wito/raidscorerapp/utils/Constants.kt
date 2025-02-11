@@ -23,6 +23,13 @@ val classColors = mapOf(
     "Evocador" to Color(0xFF33937F)
 )
 
+val specializationColors = mapOf(
+    "Tank" to Color(0xFF0070DE),
+    "DPS" to Color(0xFFC41F3B),
+    "Healer" to Color(0xFF00FF96),
+    "Augment" to Color(0xFFFF7D0A)
+)
+
 val wowClasses = listOf(
     "Guerrero",
     "Paladín",
@@ -121,10 +128,3 @@ val specializationRoles = mapOf(
     "Preservación" to "Healer",
     "Aumento" to "Supp"
 )
-
-//val roleIcons = mapOf(
-//    "Tank" to painterResource(id = R.drawable.tank_icon),
-//    "DPS" to painterResource(id = R.drawable.dps_icon),
-//    "Healer" to painterResource(id = R.drawable.healer_icon),
-//    "Supp" to painterResource(id = R.drawable.augment_icon)
-//)

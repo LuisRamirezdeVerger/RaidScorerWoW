@@ -28,6 +28,8 @@ fun AddPlayerScreen(
     navController: NavController,
     selectedClass: String,
     onClassClick: () -> Unit,
+    selectedSpecialization: String,
+    onSpecializationClick: () -> Unit,
     onAddPlayer: (Player) -> Unit
 )  {
     var name by remember { mutableStateOf("") }
@@ -57,25 +59,35 @@ fun AddPlayerScreen(
 
         Spacer (modifier = Modifier.height(8.dp))
 
-            //Spec field
-        TextField(
-            value = specialization,
-            onValueChange = {specialization = it},
-            label = { Text("Especialización") },
+        //Spec field
+        Button(
+            onClick = onSpecializationClick,
             modifier = Modifier.fillMaxWidth()
-        )
+        ) {
+            Text(if (selectedSpecialization.isEmpty()) "Seleccionar especialización" else "Clase: $selectedSpecialization")
+        }
 
-        Spacer (modifier = Modifier.height(16.dp))
+        Spacer (modifier = Modifier.height(8.dp))
+
+            //Spec field
+        //TextField(
+        //    value = specialization,
+        //    onValueChange = {specialization = it},
+        //    label = { Text("Especialización") },
+        //    modifier = Modifier.fillMaxWidth()
+        //)
+//
+        //Spacer (modifier = Modifier.height(16.dp))
 
         //SecondarySpec field
-        TextField(
-            value = secondarySpecilization,
-            onValueChange = {secondarySpecilization = it},
-            label = { Text("Especialización secundaria") },
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        Spacer (modifier = Modifier.height(16.dp))
+        //TextField(
+        //    value = secondarySpecilization,
+        //    onValueChange = {secondarySpecilization = it},
+        //    label = { Text("Especialización secundaria") },
+        //    modifier = Modifier.fillMaxWidth()
+        //)
+//
+        //Spacer (modifier = Modifier.height(16.dp))
 
         //Name Field
         TextField(
@@ -143,6 +155,9 @@ fun PreviewAddPlayerScreen() {
         onAddPlayer = {},
         navController = rememberNavController(),
         selectedClass = TODO(),
-        onClassClick = TODO()
+        onClassClick = TODO(),
+        selectedSpecialization = TODO(),
+        onSpecializationClick = TODO()
+
     )
 }

@@ -1,6 +1,7 @@
 package com.wito.raidscorerapp.model
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Column
@@ -51,6 +52,7 @@ import androidx.compose.ui.unit.dp
 import com.google.ai.client.generativeai.type.content
 import com.wito.raidscorerapp.model.Player
 import com.wito.raidscorerapp.screens.ClassSelectionScreen
+import com.wito.raidscorerapp.screens.SpecializationSelectionScreen
 
 
 @Composable
@@ -59,6 +61,7 @@ fun MainNavGraph(){
     val context = LocalContext.current
     val players = remember{ mutableListOf<Player>() }
     var selectedClass by remember { mutableStateOf("") }
+    var selectedSpecialization by remember { mutableStateOf("") }
 
     //Load players from JSON
     LaunchedEffect(Unit) {
@@ -84,15 +87,36 @@ fun MainNavGraph(){
             AddPlayerScreen(
                 navController = navController,
                 selectedClass = selectedClass,
+                selectedSpecialization = selectedSpecialization,
                 onClassClick = {
                     // navigate to class selection
                     navController.navigate("select_class")
+                },
+                onSpecializationClick = {
+                    // navigate to specialization selection
+                    if (selectedClass.isNotEmpty()) {
+                        navController.navigate("select_specialization")
+                    } else {
+                        // Mostrar un mensaje de error si no se ha seleccionado una clase
+                        Toast.makeText(context,"Selecciona una clase", Toast.LENGTH_SHORT).show()
+
+                    }
                 },
                 onAddPlayer = {player ->
                     players.add(player)
                     JsonUtils.savePlayersToFile(context, players)
                     println("Jugador agregado: ${player.name}, ${player.classWoW}, ${player.specialization}")
             })
+        }
+
+        composable("select_specialization") {
+            SpecializationSelectionScreen(
+                navController = navController,
+                selectedClass = selectedClass,
+                onSpecializationSelected = { specialization ->
+                    selectedSpecialization = specialization // Update selected specialization
+                }
+            )
         }
 
         composable("select_class") {

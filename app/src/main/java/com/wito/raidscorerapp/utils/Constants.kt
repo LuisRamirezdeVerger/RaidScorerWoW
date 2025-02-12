@@ -24,10 +24,10 @@ val classColors = mapOf(
 )
 
 val specializationColors = mapOf(
-    "Tank" to Color(0xFF0070DE),
-    "DPS" to Color(0xFFC41F3B),
-    "Healer" to Color(0xFF00FF96),
-    "Augment" to Color(0xFFFF7D0A)
+    "Tank" to Color(0xFF063767),
+    "DPS" to Color(0xFFCB3B3B),
+    "Healer" to Color(0xFF12F604),
+    "Supp" to Color(0xFFFF7D0A)
 )
 
 val wowClasses = listOf(

@@ -26,6 +26,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.draw.clip
 import com.wito.raidscorerapp.model.Player
 import com.wito.raidscorerapp.utils.classSpecializations
+import com.wito.raidscorerapp.utils.specializationColors
+import com.wito.raidscorerapp.utils.specializationRoles
 
 
 @Composable
@@ -49,18 +51,22 @@ fun SpecializationSelectionScreen (
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        specializations.forEach{ specializations ->
+        specializations.forEach{ specialization ->
+            val role = specializationRoles[specialization] ?: "DPS"
+            val specColor = specializationColors[role] ?: Color.Gray
+
             Button(
                 onClick = {
-                    onSpecializationSelected(specializations) //Callback to selected class
+                    onSpecializationSelected(specialization) //Callback to selected spec
                     navController.popBackStack()
                 },
                 modifier = Modifier
                     .fillMaxWidth()
                     .border(4.dp, SolidColor(Color.Black), RoundedCornerShape(32.dp)).clip(RoundedCornerShape(32.dp)),
-                shape = RoundedCornerShape(32.dp)
+                shape = RoundedCornerShape(32.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = specColor)
                 ) {
-                Text(specializations)
+                Text(specialization, color = Color.White)
             }
         }
     }

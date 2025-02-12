@@ -2,6 +2,7 @@ package com.wito.raidscorerapp.model
 
 import android.annotation.SuppressLint
 import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Column
@@ -48,8 +49,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.google.ai.client.generativeai.type.content
+import com.wito.raidscorerapp.R
 import com.wito.raidscorerapp.model.Player
 import com.wito.raidscorerapp.screens.ClassSelectionScreen
 import com.wito.raidscorerapp.screens.SpecializationSelectionScreen
@@ -200,7 +203,7 @@ fun MainNavGraph(){
 
 //Background color design
 @Composable
-fun MysticGradientScreen(){
+fun MysticGradientScreen(content: @Composable () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -211,11 +214,8 @@ fun MysticGradientScreen(){
                     radius = 1000f
                 )
             )
-    ){
-        content(
-            role = TODO(),
-            init = TODO()
-        )
+    ) {
+        content() // Render the screen inside the background
     }
 }
 
@@ -223,7 +223,7 @@ fun MysticGradientScreen(){
 //Main Screen Design
 @Composable
 fun HomeScreen(navController: NavController, players: MutableList<Player>){
-
+    MysticGradientScreen {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -234,10 +234,14 @@ fun HomeScreen(navController: NavController, players: MutableList<Player>){
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            Text(text = "Raid Scorer App",
-                modifier = Modifier.padding(bottom = 80.dp),
-                style = MaterialTheme.typography.headlineMedium
+            Image(
+                painter = painterResource(id = R.drawable.raid_scorer_logo_sinfondo), // Asegúrate de que "logo" sea el nombre de tu archivo de imagen
+                contentDescription = "Logo de RaidScorer App", // Descripción para accesibilidad
+                modifier = Modifier
+                    .padding(bottom = 80.dp)
+                    .size(200.dp) // Ajusta el tamaño de la imagen según sea necesario
             )
+
 
             Button(
                 onClick = { navController.navigate("add player")},
@@ -265,7 +269,7 @@ fun HomeScreen(navController: NavController, players: MutableList<Player>){
             }
         }
     }
-
+    }
 }
 
 

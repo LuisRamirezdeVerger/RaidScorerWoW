@@ -88,7 +88,9 @@ fun PlayerListScreen (players: MutableList<Player>, navController: NavController
                                 Column {
                                     Text(text = "Nombre: ${player.name}")
                                     Text(text = "Clase: ${player.classWoW}")
-                                    Text(text = "Especialización principal: ${player.specialization}")
+                                    Text(text = "Especialización principal:")
+                                    Text(text = player.specialization)
+                                    Text(text = "Rol: ${player.role}")
                                     Text(text = "Especialización secundaria: ${player.secondarySpecilization}")
                                     Text(text = "Puntuación final: ${"%.2f".format(player.calculateFinalScore(weights))}")
                                 }
@@ -98,8 +100,8 @@ fun PlayerListScreen (players: MutableList<Player>, navController: NavController
                                 ) {
                                     //Main spec icon
                                     Image(
-                                        painter = getSpecializationIcon(player.specialization),
-                                        contentDescription = player.specialization,
+                                        painter = getRoleIcon(player.role),
+                                        contentDescription = player.role,
                                         modifier = Modifier.size(96.dp)
                                     )
 
@@ -144,27 +146,12 @@ fun PlayerListScreen (players: MutableList<Player>, navController: NavController
 }
 
 @Composable
-fun getSpecializationIcon (specializationName: String): Painter{
-    return when (specializationName){
+fun getRoleIcon (role: String): Painter{
+    return when (role){
         "DPS" -> painterResource(id = R.drawable.dps_icon)
         "Healer" -> painterResource(id = R.drawable.healer_icon)
         "Tank" -> painterResource(id = R.drawable.tank_icon)
-        "Augment" -> painterResource(id = R.drawable.augment_icon)
+        "Supp" -> painterResource(id = R.drawable.augment_icon)
         else -> painterResource(id = R.drawable.raid_scorer_logo)
     }
 }
-
-//@Composable
-//fun PlayerItem(player: Player, modifier: Modifier = Modifier) {
-//    Column(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .padding(vertical = 8.dp)
-//            .background(MaterialTheme.colorScheme.surface)
-//            .padding(16.dp)
-//    ) {
-//        Text("Nombre: ${player.nombre}", style = MaterialTheme.typography.bodyLarge, color = Color.White)
-//        Text("Clase: ${player.clase}", style = MaterialTheme.typography.bodyMedium, color = Color.White)
-//        Text("Especialización: ${player.especializacion}", style = MaterialTheme.typography.bodySmall, color = Color.White)
-//    }
-//}

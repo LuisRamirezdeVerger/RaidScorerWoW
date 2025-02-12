@@ -1,5 +1,6 @@
 package com.wito.raidscorerapp.screens
 
+import android.provider.SyncStateContract.Constants
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -25,6 +26,7 @@ import androidx.navigation.compose.rememberNavController
 import com.wito.raidscorerapp.R
 import com.wito.raidscorerapp.model.Player
 import com.wito.raidscorerapp.screens.AddPlayerScreen
+import com.wito.raidscorerapp.utils.specializationRoles
 
 @Composable
 fun AddPlayerScreen(
@@ -36,10 +38,11 @@ fun AddPlayerScreen(
     onAddPlayer: (Player) -> Unit
 )  {
     var name by remember { mutableStateOf("") }
-    var classWoW by remember { mutableStateOf("") }
-    var specialization by remember { mutableStateOf("") }
+    var classWoW by remember { mutableStateOf(selectedClass) }
+    var specialization by remember { mutableStateOf(selectedSpecialization) }
     var secondarySpecilization by remember { mutableStateOf("") }
     val context = LocalContext.current
+    val role = specializationRoles[specialization] ?: "Unknown"
 
     Column(
         modifier = Modifier
@@ -68,20 +71,10 @@ fun AddPlayerScreen(
             onClick = onSpecializationClick,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(if (selectedSpecialization.isEmpty()) "Seleccionar especialización" else "Clase: $selectedSpecialization")
+            Text(if (selectedSpecialization.isEmpty()) "Seleccionar especialización" else "Especializacón: $selectedSpecialization")
         }
 
         Spacer (modifier = Modifier.height(8.dp))
-
-            //Spec field
-        //TextField(
-        //    value = specialization,
-        //    onValueChange = {specialization = it},
-        //    label = { Text("Especialización") },
-        //    modifier = Modifier.fillMaxWidth()
-        //)
-//
-        //Spacer (modifier = Modifier.height(16.dp))
 
         //SecondarySpec field
         //TextField(
@@ -107,7 +100,7 @@ fun AddPlayerScreen(
         Button(
             onClick = {
                 if (name.isNotBlank()){
-                    onAddPlayer (Player(name, classWoW, specialization, secondarySpecilization))
+                    onAddPlayer (Player(name, classWoW, specialization, secondarySpecilization, role))
                     Toast.makeText(context,"Jugador $name agregado correctamente", Toast.LENGTH_SHORT).show()
                     // Navigate back to Main Screen
                     navController.popBackStack()

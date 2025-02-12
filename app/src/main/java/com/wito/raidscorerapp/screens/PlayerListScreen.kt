@@ -101,7 +101,7 @@ fun PlayerListScreen (players: MutableList<Player>, navController: NavController
                                     //Main spec icon
                                     Image(
                                         painter = getRoleIcon(player.role),
-                                        contentDescription = player.role,
+                                        contentDescription = player.role ?: "Rol no especificado",
                                         modifier = Modifier.size(96.dp)
                                     )
 
@@ -146,7 +146,7 @@ fun PlayerListScreen (players: MutableList<Player>, navController: NavController
 }
 
 @Composable
-fun getRoleIcon (role: String): Painter{
+fun getRoleIcon (role: String?): Painter{
     return when (role){
         "DPS" -> painterResource(id = R.drawable.dps_icon)
         "Healer" -> painterResource(id = R.drawable.healer_icon)

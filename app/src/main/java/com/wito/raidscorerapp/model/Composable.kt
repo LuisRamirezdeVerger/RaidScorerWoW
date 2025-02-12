@@ -230,37 +230,36 @@ fun HomeScreen(navController: NavController, players: MutableList<Player>){
     )  {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.Center,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
         ) {
             Text(text = "Raid Scorer App",
-                modifier = Modifier.padding(bottom = 16.dp),
+                modifier = Modifier.padding(bottom = 80.dp),
                 style = MaterialTheme.typography.headlineMedium
             )
 
             Button(
                 onClick = { navController.navigate("add player")},
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().padding(8.dp)
             ) {
                 Text ("Agregar jugador")
             }
 
             Button(
                 onClick = { navController.navigate("list players") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().padding(8.dp)
             ) {
                 Text("Listar jugadores")
             }
 
             Button(onClick = { navController.navigate("remove players") },
-                modifier = Modifier.fillMaxWidth()) {
+                modifier = Modifier.fillMaxWidth().padding(8.dp)) {
                 Text("Eliminar jugador")
             }
 
             Button(onClick = { navController.navigate("configure_weights")},
-                modifier = Modifier.fillMaxWidth().padding(16.dp)
+                modifier = Modifier.fillMaxWidth().padding(8.dp)
                 ) {
                 Text("Configurar pesos de criterios")
             }

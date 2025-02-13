@@ -12,6 +12,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -22,11 +24,12 @@ import com.wito.raidscorerapp.model.Player
 
 @Composable
 fun RemovePlayerScreen(
-    players: MutableList<Player>,
+    initialPlayers: MutableList<Player>,
     navController: NavController,
     onRemovePlayer: (Player) -> Unit
 ) {
     val context = LocalContext.current
+    val players = remember { mutableStateListOf<Player>().apply { addAll(initialPlayers) } }
 
 
     Box(
@@ -76,7 +79,7 @@ fun RemovePlayerScreen(
                                         players.remove(player)
                                         onRemovePlayer(player)
                                         Toast.makeText(context, "Jugador ${player.name} eliminado", Toast.LENGTH_LONG).show()
-                                        run { navController.popBackStack() }
+                                        //run { navController.popBackStack() }
                                     } catch (e: Exception) {
                                         Log.e("RemovePlayer", "Error al eliminar el jugador, ${e.message}")
                                     }

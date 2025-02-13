@@ -68,14 +68,14 @@ fun EditPlayerScreen(
 
 
         //Class dropdown
-        ClassDropdown(
-            selectedClass = classWoW,
-            onClassSelected = { selectedClass ->
-                classWoW = selectedClass
-                selectedColor = classColors[selectedClass] ?: Color.White
-            },
-            modifier = Modifier.fillMaxWidth()
-        )
+        //ClassDropdown(
+        //    selectedClass = classWoW,
+        //    onClassSelected = { selectedClass ->
+        //        classWoW = selectedClass
+        //        selectedColor = classColors[selectedClass] ?: Color.White
+        //    },
+        //    modifier = Modifier.fillMaxWidth()
+        //)
 
 
 

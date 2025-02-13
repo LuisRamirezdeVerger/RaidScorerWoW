@@ -24,12 +24,12 @@ import com.wito.raidscorerapp.model.Player
 
 @Composable
 fun RemovePlayerScreen(
-    initialPlayers: MutableList<Player>,
+    players: MutableList<Player>,
     navController: NavController,
     onRemovePlayer: (Player) -> Unit
 ) {
     val context = LocalContext.current
-    val players = remember { mutableStateListOf<Player>().apply { addAll(initialPlayers) } }
+    val players = remember { mutableStateListOf<Player>().apply { addAll(players) } }
 
 
     Box(
@@ -47,56 +47,70 @@ fun RemovePlayerScreen(
                 style = MaterialTheme.typography.headlineMedium,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
-
-            LazyColumn (
-                modifier = Modifier.fillMaxSize()
-            ){
-                items(players){player ->
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 4.dp),
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.surface,
-                            contentColor = MaterialTheme.colorScheme.onSurface
-                        )
-                    ) {
-                        Row (
+            if (players.isEmpty()) {
+                Text(
+                    text = "No hay jugadores añadidos",
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
+            } else {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    items(players) { player ->
+                        Card(
                             modifier = Modifier
-                                .padding(16.dp)
-                                .fillMaxWidth(),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ){
-                            Column {
-                                Text(text = "Nombre: ${player.name}")
-                                Text(text = "Nombre: ${player.classWoW}")
-                                Text(text = "Nombre: ${player.specialization}")
-                            }
-                            Button(
-                                onClick = {
-                                    try {
-                                        players.remove(player)
-                                        onRemovePlayer(player)
-                                        Toast.makeText(context, "Jugador ${player.name} eliminado", Toast.LENGTH_LONG).show()
-                                        //run { navController.popBackStack() }
-                                    } catch (e: Exception) {
-                                        Log.e("RemovePlayer", "Error al eliminar el jugador, ${e.message}")
-                                    }
-
-                                }
+                                .fillMaxWidth()
+                                .padding(vertical = 4.dp),
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.surface,
+                                contentColor = MaterialTheme.colorScheme.onSurface
+                            )
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .padding(16.dp)
+                                    .fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.SpaceBetween
                             ) {
-                                Text(text = "Eliminar")
+                                Column {
+                                    Text(text = "Nombre: ${player.name}")
+                                    Text(text = "Nombre: ${player.classWoW}")
+                                    Text(text = "Nombre: ${player.specialization}")
+                                }
+                                Button(
+                                    onClick = {
+                                        try {
+                                            players.remove(player)
+                                            onRemovePlayer(player)
+                                            Toast.makeText(
+                                                context,
+                                                "Jugador ${player.name} eliminado",
+                                                Toast.LENGTH_LONG
+                                            ).show()
+                                            //run { navController.popBackStack() }
+                                        } catch (e: Exception) {
+                                            Log.e(
+                                                "RemovePlayer",
+                                                "Error al eliminar el jugador, ${e.message}"
+                                            )
+                                        }
+
+                                    }
+                                ) {
+                                    Text(text = "Eliminar")
+                                }
                             }
                         }
                     }
                 }
-            }
-            Button(
-                onClick = { navController.popBackStack() }, // Volver al menú principal
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Volver")
+                Button(
+                    onClick = { navController.popBackStack() }, // Volver al menú principal
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Volver")
+                }
             }
         }
     }
